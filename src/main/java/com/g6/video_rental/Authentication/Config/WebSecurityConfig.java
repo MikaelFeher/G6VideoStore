@@ -28,8 +28,20 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                     .permitAll()
                     .and()
                 .authorizeRequests()
+                    .anyRequest().permitAll();
+                /*.formLogin()
+                    .loginPage("/login")
+                    .failureUrl("/login?error")
+                    .permitAll()
+                    .and()
+                .logout()
+                    .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+                    .logoutSuccessUrl("/login")
+                    .permitAll()
+                    .and()
+                .authorizeRequests()
                     .antMatchers("/").hasRole("SALE")
-                    .anyRequest().authenticated();
+                    .anyRequest().authenticated();*/
     }
 
     @Bean
