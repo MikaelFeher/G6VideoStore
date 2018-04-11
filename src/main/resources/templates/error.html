@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div>
+        <p>You tried to enter <span th:text="${path}"></span></p>
+        <p>The page could not load for you because it was <span th:text="${#strings.toLowerCase(error)}"></span></p>
+    </div>
+
+    <div>
+        <p id="large-error-text">Error: <span th:text="${status}"></span></p>
+    </div>
+    <!--some different thymeleaf shit one can use below, saving for future reference!
+
+    <div th:text="${status}">Status</div>
+    <div th:text="${timestamp}">Timestamp</div>
+    <div th:text="${path}">Status</div>
+    <div th:text="${error}">Status</div>
+    <div th:text="${message}">Status</div>
+    <div th:text="${trace}">Status</div>
+    <h1>Lite error här ja</h1> -->
+</body>
+</html>
