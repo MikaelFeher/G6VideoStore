@@ -1,31 +1,39 @@
 package com.g6.video_rental.domain.Entities;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Customer {
-
-    @Id
-    @GeneratedValue
-    private long id;  // socialSecurityNumber is supposed to be searchable, do we still want id???
-
     private String socialSecurityNumber;
     private String firstName;
     private String lastName;
     private String address;
     private String zipCode;
     private String city;
-
-    @Column(columnDefinition="VARCHAR(45) DEFAULT Sverige")
-    private String Country;
-
+    private String country = "Sverige";
     private String phoneNumber;
     private String email;
+    private List<Movie> movies = new ArrayList<>();
+    private List<RentedMovie> rentedMovies = new ArrayList<>();
 
-    public long getId() {
-        return id;
+    public Customer() {
     }
 
+    public Customer(String socialSecurityNumber, String firstName, String lastName, String address, String zipCode, String city, String country, String phoneNumber, String email) {
+        this.socialSecurityNumber = socialSecurityNumber;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.address = address;
+        this.zipCode = zipCode;
+        this.city = city;
+        this.country = country;
+        this.phoneNumber = phoneNumber;
+        this.email = email;
+    }
+
+    @Id
     public String getSocialSecurityNumber() {
         return socialSecurityNumber;
     }
@@ -75,11 +83,11 @@ public class Customer {
     }
 
     public String getCountry() {
-        return Country;
+        return country;
     }
 
     public void setCountry(String country) {
-        Country = country;
+        country = country;
     }
 
     public String getPhoneNumber() {
@@ -98,22 +106,34 @@ public class Customer {
         this.email = email;
     }
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "id")
-    public List<Movie> getRentedMovies() {
+    public void setMovies(List<Movie> movies) {
+        this.movies = movies;
+    }
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "customer")
+    public List<Movie> getMovies() {
         return movies;
+    }
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "rentedMovieKey")
+    public List<RentedMovie> getRentedMovies() {
+        return rentedMovies;
+    }
+
+    public void setRentedMovies(List<RentedMovie> rentedMovies) {
+        this.rentedMovies = rentedMovies;
     }
 
     @Override
     public String toString() {
         return "Customer{" +
-                "id=" + id +
                 ", socialSecurityNumber='" + socialSecurityNumber + '\'' +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", address='" + address + '\'' +
                 ", zipCode='" + zipCode + '\'' +
                 ", city='" + city + '\'' +
-                ", Country='" + Country + '\'' +
+                ", country='" + country + '\'' +
                 ", phoneNumber='" + phoneNumber + '\'' +
                 ", email='" + email + '\'' +
                 '}';

@@ -8,19 +8,35 @@ import javax.persistence.ManyToOne;
 @Entity
 public class Movie {
 
-    @Id
-    @GeneratedValue
     private long productNumber;
-
     private String name;
     private String description;
     private String releaseDate;
     private String category;
     private String format;
     private boolean rented;
+    private Customer customer;
 
+    public Movie() {
+    }
+
+    public Movie(String name, String description, String releaseDate, String category, String format, boolean rented) {
+        this.name = name;
+        this.description = description;
+        this.releaseDate = releaseDate;
+        this.category = category;
+        this.format = format;
+        this.rented = rented;
+    }
+
+    @Id
+    @GeneratedValue
     public long getProductNumber() {
         return productNumber;
+    }
+
+    public void setProductNumber(long productNumber) {
+        this.productNumber = productNumber;
     }
 
     public String getName() {
@@ -69,6 +85,10 @@ public class Movie {
 
     public void setRented(boolean rented) {
         this.rented = rented;
+    }
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
     }
 
     @ManyToOne

@@ -1,4 +1,4 @@
-package com.g6.video_rental.Authentication.Controllers;
+package com.g6.video_rental.authentication.controllers;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
