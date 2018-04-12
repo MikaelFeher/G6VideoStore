@@ -3,7 +3,8 @@ package com.g6.video_rental.domain.Entities;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import java.util.List;
 
 @Entity
 public class Movie {
@@ -15,9 +16,9 @@ public class Movie {
     private String category;
     private String format;
     private boolean rented;
-    private Customer customer;
+    private List<RentedMovie> rentedMovies;
 
-    public Movie() {
+    protected Movie() {
     }
 
     public Movie(String name, String description, String releaseDate, String category, String format, boolean rented) {
@@ -87,13 +88,13 @@ public class Movie {
         this.rented = rented;
     }
 
-    public void setCustomer(Customer customer) {
-        this.customer = customer;
+    @OneToMany(mappedBy = "movie")
+    public List<RentedMovie> getRentedMovies() {
+        return rentedMovies;
     }
 
-    @ManyToOne
-    public Customer getCustomer() {
-        return customer;
+    public void setRentedMovies(List<RentedMovie> rentedMovies) {
+        this.rentedMovies = rentedMovies;
     }
 
     @Override

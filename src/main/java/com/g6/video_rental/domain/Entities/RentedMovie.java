@@ -1,35 +1,26 @@
 package com.g6.video_rental.domain.Entities;
 
-import javax.persistence.EmbeddedId;
-import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 public class RentedMovie {
-    //private RentedMovieKey key;
-    private Date rentedDate;
-    private Date returnedDate;
-
+    private Long id;
     private Customer customer;
     private Movie movie;
+    private Date rentedDate;
+    private Date returnedDate;
 
     public RentedMovie() {
     }
 
-    /*public RentedMovie(RentedMovieKey key) {
-        this.key = key;
+    public RentedMovie(Customer customer, Movie movie) {
+        this.customer = customer;
+        this.movie = movie;
         this.rentedDate = new Date();
-    }*/
-
-    /*@EmbeddedId
-    public RentedMovieKey getKey() {
-        return key;
     }
-
-    public void setKey(RentedMovieKey key) {
-        this.key = key;
-    }*/
 
     public Date getRentedDate() {
         return rentedDate;
@@ -47,6 +38,16 @@ public class RentedMovie {
         this.returnedDate = returnedDate;
     }
 
+    @Id
+    @GeneratedValue
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     @ManyToOne
     public Customer getCustomer() {
         return customer;
@@ -56,6 +57,7 @@ public class RentedMovie {
         this.customer = customer;
     }
 
+    @ManyToOne
     public Movie getMovie() {
         return movie;
     }
@@ -67,7 +69,9 @@ public class RentedMovie {
     @Override
     public String toString() {
         return "RentedMovie{" +
-                //"key=" + key +
+                "id=" + id +
+                ", customer=" + customer +
+                ", movie=" + movie +
                 ", rentedDate=" + rentedDate +
                 ", returnedDate=" + returnedDate +
                 '}';
