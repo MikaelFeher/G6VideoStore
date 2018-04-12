@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:data-th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div th:text="${customer}"></div>
+
+    <table>
+        <tr>
+            <th>Personnummer</th>
+            <th>Förnamn</th>
+            <th>Efternamn</th>
+            <th>Adress</th>
+            <th>Postnummer</th>
+            <th>Stad</th>
+            <th>Laand</th>
+            <th>Telefonnummer</th>
+            <th>E-mail</th>
+        </tr>
+        <a href="#">
+        <tr class="table-row" th:each="customer : ${customer}" data-href="customer">
+            <td th:text="${customer.socialSecurityNumber}"></td>
+            <td th:text="${customer.firstName}"></td>
+            <td th:text="${customer.lastName}"></td>
+            <td th:text="${customer.address}"></td>
+            <td th:text="${customer.zipCode}"></td>
+            <td th:text="${customer.city}"></td>
+            <td th:text="${customer.country}"></td>
+            <td th:text="${customer.phoneNumber}"></td>
+            <td th:text="${customer.email}"></td>
+        </tr>
+        </a>
+    </table>
+</body>
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+
+<script type="text/javascript">
+    $(document).ready(function($) {
+        $(".table-row").click(function() {
+            window.document.location = $(this).data("href");
+        });
+    });
+</script>
+<style type="text/css">
+    .table-row{
+        cursor:pointer;
+    }
+    </style>
+</html>
