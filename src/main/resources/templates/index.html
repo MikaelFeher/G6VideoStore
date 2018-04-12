@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<html   xmlns="http://www.w3.org/1999/xhtml"
-        xmlns:th="http://www.thymeleaf.org"
-        xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -9,5 +9,44 @@
 <body>
     <h1>HEJ!</h1>
     <a th:href="@{/logout}">Logga ut</a>
+    <form method="get" action="customer/customer"> <!--Ska vara post sen men har get bara för test-->
+        <label>
+            Personnummer:<br>
+            <input type="text" name="socialsecuritynumber"><br>
+        </label>
+        <label>
+            Förnamn:<br>
+            <input type="text" name="firstname"><br>
+        </label>
+        <label>
+            EFternamn:<br>
+            <input type="text" name="lastname"><br>
+        </label>
+        <label>
+            Adress:<br>
+            <input type="text" name="adress"><br>
+        </label>
+        <label>
+            Postnummer:<br>
+            <input type="text" name="zipcode"><br>
+        </label>
+        <label>
+            Stad:<br>
+            <input type="text" name="city"><br>
+        </label>
+        <label>
+            Land:<br>
+            <input type="text" name="country"><br>
+        </label>
+        <label>
+            E-mail:<br>
+            <input type="email" name="email"><br>
+        </label>
+        <label>
+            Telefonnummer:<br>
+            <input type="text" name="phonenumber"><br>
+        </label>
+        <button type="submit" value="customer">Till Customer</button><br>
+    </form>
 </body>
 </html>
