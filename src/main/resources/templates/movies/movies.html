@@ -8,6 +8,18 @@
 </head>
 <body>
     <div class="container">
+        <div class="row">
+            <form action="#" th:action="@{/movies.html}" th:object="${movie}" method="POST" class="form-group col-md-4 ml-auto mr-auto">
+                <!--<label for="searchByName">Sök Titel</label>-->
+                <input type="text" th:field="${name}" class="form-control" placeholder="Titel...">
+                <!--<label for="searchByCategory">Sök Kategori</label>-->
+                <!--<input type="text" th:value="*{category}"  class="form-control"  placeholder="Kategori...">-->
+                <!--&lt;!&ndash;<label for="searchByReleaseYear">Sök Utgivningsår</label>&ndash;&gt;-->
+                <!--<input type="text"th:field="*{releaseYear}"  class="form-control"  placeholder="Utgivningsår...">-->
+                <button class="btn btn-outline-success btn-block mt-2" value="Submit">Sök</button>
+            </form>
+
+        </div>
         <table class="table table-striped table-hover">
             <thead class="thead-dark">
             <tr>
