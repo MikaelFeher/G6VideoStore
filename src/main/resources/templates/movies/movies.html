@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Filmer</title>
+</head>
+<body>
+    <table>
+        <thead>
+            <tr>
+                <th>Artikelnummer</th>
+                <th>Titel</th>
+                <th>Handling</th>
+                <th>Utgivningsår</th>
+                <th>Uthyrd</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>1</td>
+                <td>Blade Runner</td>
+                <td>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab consectetur consequuntur debitis dolorum eaque harum, ipsum iusto maxime modi molestiae nesciunt nostrum, nulla optio placeat quas, quidem rerum ut voluptatem. </td>
+                <td>1984</td>
+                <td>Ja</td>
+            </tr>
+            <th:block th:each="movie : ${movies}">
+                <tr>
+                    <td th:text="${movie.productNumber}"></td>
+                    <td th:text="${movie.name}"></td>
+                    <td th:text="${movie.description}">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab consectetur consequuntur debitis dolorum eaque harum, ipsum iusto maxime modi molestiae nesciunt nostrum, nulla optio placeat quas, quidem rerum ut voluptatem. </td>
+                    <td th:text="${movie.getReleaseYear}">1984</td>
+                    <!-- IF MOVIE IS RENTED -->
+                    <td th:if="${movie.rented}">Ja</td>
+                    <!-- IF MOVIE IS NOT RENTED -->
+                    <td th:unless="${movie.rented}">Nej</td>
+                </tr>
+            </th:block>
+        </tbody>
+    </table>
+</body>
+</html>

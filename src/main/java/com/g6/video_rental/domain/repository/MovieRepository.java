@@ -8,7 +8,7 @@ import java.util.List;
 public interface MovieRepository extends CrudRepository<Movie, Long> {
     List<Movie> findByName(String name);
     List<Movie> findByCategory(String category);
-    List<Movie> findByReleaseDate(String releaseDate);
+    List<Movie> findByReleaseYear(String releaseYear);
     List<Movie> findByRented(boolean rented);
     List<Movie> findByFormat(String format);
 }

@@ -12,7 +12,7 @@ public class Movie {
     private long productNumber;
     private String name;
     private String description;
-    private String releaseDate;
+    private String releaseYear;
     private String category;
     private String format;
     private boolean rented;
@@ -21,10 +21,10 @@ public class Movie {
     protected Movie() {
     }
 
-    public Movie(String name, String description, String releaseDate, String category, String format, boolean rented) {
+    public Movie(String name, String description, String releaseYear, String category, String format, boolean rented) {
         this.name = name;
         this.description = description;
-        this.releaseDate = releaseDate;
+        this.releaseYear = releaseYear;
         this.category = category;
         this.format = format;
         this.rented = rented;
@@ -56,12 +56,12 @@ public class Movie {
         this.description = description;
     }
 
-    public String getReleaseDate() {
-        return releaseDate;
+    public String getReleaseYear() {
+        return releaseYear;
     }
 
-    public void setReleaseDate(String releaseDate) {
-        this.releaseDate = releaseDate;
+    public void setReleaseYear(String releaseYear) {
+        this.releaseYear = releaseYear;
     }
 
     public String getCategory() {
@@ -103,7 +103,7 @@ public class Movie {
                 "productNumber=" + productNumber +
                 ", name='" + name + '\'' +
                 ", description='" + description + '\'' +
-                ", releaseDate='" + releaseDate + '\'' +
+                ", releaseYear='" + releaseYear + '\'' +
                 ", category='" + category + '\'' +
                 ", format='" + format + '\'' +
                 ", rented=" + rented +
