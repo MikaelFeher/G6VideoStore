@@ -1,25 +1,24 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:data-th="http://www.w3.org/1999/xhtml">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8"/>
     <title>Title</title>
 </head>
 <body>
-    <div th:text="${customer}"></div>
-
-    <table>
+<div class="container">
+    <table class="table">
         <tr>
-            <th>Personnummer</th>
-            <th>Förnamn</th>
-            <th>Efternamn</th>
-            <th>Adress</th>
-            <th>Postnummer</th>
-            <th>Stad</th>
-            <th>Laand</th>
-            <th>Telefonnummer</th>
-            <th>E-mail</th>
+            <th scope="col">Personnummer</th>
+            <th scope="col">Förnamn</th>
+            <th scope="col">Efternamn</th>
+            <th scope="col">Adress</th>
+            <th scope="col">Postnummer</th>
+            <th scope="col">Stad</th>
+            <th scope="col">Land</th>
+            <th scope="col">Telefonnummer</th>
+            <th scope="col">E-mail</th>
         </tr>
-        <tr class="table-row" th:each="customer : ${customer}" data-href="customer">
+        <tr class="table-row" th:each="customer : ${customers}" th:onclick="'customerInformation(' + ${customer.socialSecurityNumber}+ ');'">
             <td th:text="${customer.socialSecurityNumber}"></td>
             <td th:text="${customer.firstName}"></td>
             <td th:text="${customer.lastName}"></td>
@@ -31,6 +30,8 @@
             <td th:text="${customer.email}"></td>
         </tr>
     </table>
+</div>
+
 </body>
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
@@ -39,20 +40,21 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
 <!-- Latest compiled and minified JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 
 <!-- Until I know where to put them since we are missing a static folder -->
 <script type="text/javascript">
-    $(document).ready(function($) {
-        $(".table-row").click(function() {
-            window.document.location = $(this).data("href");
-        });
-    });
+    function customerInformation(socialSecurityNumber) {
+        alert(socialSecurityNumber);
+        window.location.assign(`/customer/customer?socialSecurityNumber=${socialSecurityNumber}`);
+        console.log(socialSecurityNumber);
+    }
 </script>
 <style type="text/css">
     .table-row{
         cursor:pointer;
     }
-    </style>
+</style>
 </html>
