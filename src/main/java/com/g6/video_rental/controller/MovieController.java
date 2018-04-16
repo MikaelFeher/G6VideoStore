@@ -7,7 +7,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -19,29 +18,37 @@ public class MovieController {
 
 //    Needs a redirect to the "/" getmapping when the url is 'http://localhost/movies'...
 
-    @GetMapping("/")
+    @GetMapping("")
     public String getMovies(Model model) {
         List<Movie> movies = (List<Movie>) movieRepository.findAll();
         model.addAttribute("movies", movies);
         return "movies/movies";
     }
-    @PostMapping("/")
-    public String findMovies(@ModelAttribute Movie movie, Model model) {
-        List<Movie> allMovies = (List<Movie>) movieRepository.findAll();
-        List<Movie> filteredMovies = new ArrayList<>();
-        List<Movie> tempMovies = new ArrayList<>();
 
-        for (Movie m : allMovies){
-            if (movie.getName() != null) {
-                tempMovies = movieRepository.findByName(movie.getName());
-                for (int i = 0; i < filteredMovies.size(); i++) {
-                    for (int j = 0; j < tempMovies.size(); j++) {
-                        if (tempMovies.get(j).getProductNumber() != filteredMovies.get(i).getProductNumber() ) {
-                            filteredMovies.add(tempMovies.get(j));
-                        }
-                    }
-                }
-            }
+    @GetMapping("/searchMovies")
+    public String search(Model model, @RequestParam(required = false) String name, @RequestParam(required = false) String category, @RequestParam(required = false) String releaseYear) {
+        List<Movie> filteredMovies = movieRepository.findByNameContainsIgnoreCaseAndCategoryContainsIgnoreCaseAndReleaseYearContains(name, category, releaseYear);
+        model.addAttribute("movies", filteredMovies);
+        return "movies/movies";
+    }
+
+//    @PostMapping("/")
+//    public String findMovies(@ModelAttribute Movie movie, Model model) {
+//        List<Movie> allMovies = (List<Movie>) movieRepository.findAll();
+//        List<Movie> filteredMovies = new ArrayList<>();
+//        List<Movie> tempMovies = new ArrayList<>();
+//
+//        for (Movie m : allMovies){
+//            if (movie.getName() != null) {
+//                tempMovies = movieRepository.findByName(movie.getName());
+//                for (int i = 0; i < filteredMovies.size(); i++) {
+//                    for (int j = 0; j < tempMovies.size(); j++) {
+//                        if (tempMovies.get(j).getProductNumber() != filteredMovies.get(i).getProductNumber() ) {
+//                            filteredMovies.add(tempMovies.get(j));
+//                        }
+//                    }
+//                }
+//            }
 //            if (movie.getCategory() != null) {
 //                tempMovies = movieRepository.findByCategory(category);
 //                for (int i = 0; i < filteredMovies.size(); i++) {
@@ -62,11 +69,11 @@ public class MovieController {
 //                    }
 //                }
 //            }
-        }
-
-        model.addAttribute("movies", filteredMovies);
-        return "movies/movies";
-    }
+//        }
+//
+//        model.addAttribute("movies", filteredMovies);
+//        return "movies/movies";
+//    }
 
     @GetMapping("/movie/{productNumber}")
     public String getMovieByProductNumber(Model model, @PathVariable Long productNumber) {
