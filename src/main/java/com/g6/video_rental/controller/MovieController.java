@@ -16,8 +16,6 @@ public class MovieController {
     @Autowired
     private MovieRepository movieRepository;
 
-//    Needs a redirect to the "/" getmapping when the url is 'http://localhost/movies'...
-
     @GetMapping("")
     public String getMovies(Model model) {
         List<Movie> movies = (List<Movie>) movieRepository.findAll();
@@ -32,50 +30,7 @@ public class MovieController {
         return "movies/movies";
     }
 
-//    @PostMapping("/")
-//    public String findMovies(@ModelAttribute Movie movie, Model model) {
-//        List<Movie> allMovies = (List<Movie>) movieRepository.findAll();
-//        List<Movie> filteredMovies = new ArrayList<>();
-//        List<Movie> tempMovies = new ArrayList<>();
-//
-//        for (Movie m : allMovies){
-//            if (movie.getName() != null) {
-//                tempMovies = movieRepository.findByName(movie.getName());
-//                for (int i = 0; i < filteredMovies.size(); i++) {
-//                    for (int j = 0; j < tempMovies.size(); j++) {
-//                        if (tempMovies.get(j).getProductNumber() != filteredMovies.get(i).getProductNumber() ) {
-//                            filteredMovies.add(tempMovies.get(j));
-//                        }
-//                    }
-//                }
-//            }
-//            if (movie.getCategory() != null) {
-//                tempMovies = movieRepository.findByCategory(category);
-//                for (int i = 0; i < filteredMovies.size(); i++) {
-//                    for (int j = 0; j < tempMovies.size(); j++) {
-//                        if (tempMovies.get(j).getProductNumber() != filteredMovies.get(i).getProductNumber() ) {
-//                            filteredMovies.add(tempMovies.get(j));
-//                        }
-//                    }
-//                }
-//            }
-//            if (releaseYear != null) {
-//                tempMovies = movieRepository.findByReleaseYear(releaseYear);
-//                for (int i = 0; i < filteredMovies.size(); i++) {
-//                    for (int j = 0; j < tempMovies.size(); j++) {
-//                        if (tempMovies.get(j).getProductNumber() != filteredMovies.get(i).getProductNumber() ) {
-//                            filteredMovies.add(tempMovies.get(j));
-//                        }
-//                    }
-//                }
-//            }
-//        }
-//
-//        model.addAttribute("movies", filteredMovies);
-//        return "movies/movies";
-//    }
-
-    @GetMapping("/movie/{productNumber}")
+    @GetMapping("/movie/{productNumber}/details")
     public String getMovieByProductNumber(Model model, @PathVariable Long productNumber) {
         List<Movie> singleMovie = movieRepository.findByProductNumber(productNumber);
         model.addAttribute("singleMovie", singleMovie);

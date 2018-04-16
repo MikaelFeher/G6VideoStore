@@ -27,6 +27,8 @@ public class VideoRentalApplication {
                 movieRepository.save(new Movie("Star Wars - A new hope", "Epic saga about the evil empire fighting the rebel alliance", "1977", "Science Fiction", "Blu-Ray", false));
                 movieRepository.save(new Movie("Star Wars - The empire strikes back", "Epic saga about the evil empire kicking the rebel alliance ass", "1980", "Science Fiction", "Blu-Ray", false));
                 movieRepository.save(new Movie("Star Wars - Return of the Jedi", "Epic saga about the evil empire getting it's ass kicked by the rebel alliance ", "1983", "Science Fiction", "Blu-Ray", false));
+                movieRepository.save(new Movie("Hacksaw Ridge", "Epic tale one mans heroic heroism in the face of danger", "2016", "War", "Blu-Ray", false));
+                movieRepository.save(new Movie("Deadpool", "Epic asskicking movie about the coolest superhero in red spandex", "2016", "Action", "Blu-Ray", false));
             }
 
             // Adding customers to the db...
