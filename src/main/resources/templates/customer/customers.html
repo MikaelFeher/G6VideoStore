@@ -1,10 +1,19 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:data-th="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8"/>
     <title>Title</title>
+    <script type="text/javascript">
+        function customerInformation(socialSecurityNumber) {
+            alert(socialSecurityNumber);
+            window.location.assign(`/customer/customer?socialSecurityNumber=${socialSecurityNumber}`);
+            console.log(socialSecurityNumber);
+        }
+    </script>
 </head>
 <body>
+
 <div class="container">
     <table class="table">
         <tr>
@@ -18,7 +27,8 @@
             <th scope="col">Telefonnummer</th>
             <th scope="col">E-mail</th>
         </tr>
-        <tr class="table-row" th:each="customer : ${customers}" th:onclick="'customerInformation(' + ${customer.socialSecurityNumber}+ ');'">
+        <th:block th:each="customer : ${customers}">
+        <tr class="table-row"th:onclick="'customerInformation(\'' + ${customer.socialSecurityNumber}+ '\')'">
             <td th:text="${customer.socialSecurityNumber}"></td>
             <td th:text="${customer.firstName}"></td>
             <td th:text="${customer.lastName}"></td>
@@ -29,6 +39,7 @@
             <td th:text="${customer.phoneNumber}"></td>
             <td th:text="${customer.email}"></td>
         </tr>
+        </th:block>
     </table>
 </div>
 
@@ -45,13 +56,7 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 
 <!-- Until I know where to put them since we are missing a static folder -->
-<script type="text/javascript">
-    function customerInformation(socialSecurityNumber) {
-        alert(socialSecurityNumber);
-        window.location.assign(`/customer/customer?socialSecurityNumber=${socialSecurityNumber}`);
-        console.log(socialSecurityNumber);
-    }
-</script>
+
 <style type="text/css">
     .table-row{
         cursor:pointer;

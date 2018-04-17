@@ -1,10 +1,81 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
 <body>
-    <h1>Att göra: Få med information om vad som klickades!</h1>
+<h1>Att göra: Få med information om vad som klickades!</h1>
+
+<form method="get" th:object="${customer}" th:action="@{/customer/addcustomer}">
+    <th:block th:each="customer : ${customer}">
+        <label>
+            Personnummer:<br>
+            <input type="text" name="socialSecurityNumber" th:value="${customer.socialSecurityNumber}"><br>
+        </label>
+        <label>
+            Förnamn:<br>
+            <input type="text" name="firstName" th:value="${customer.firstName}"><br>
+        </label>
+        <label>
+            Efternamn:<br>
+            <input type="text" name="lastName" th:value="${customer.lastName}"><br>
+        </label>
+        <label>
+            Adress:<br>
+            <input type="text" name="address" th:value="${customer.address}"><br>
+        </label>
+        <label>
+            Postnummer:<br>
+            <input type="text" name="zipCode" th:value="${customer.zipCode}"><br>
+        </label>
+        <label>
+            Stad:<br>
+            <input type="text" name="city" th:value="${customer.city}"><br>
+        </label>
+        <label>
+            Land:<br>
+            <input type="text" name="country" th:value="${customer.country}"><br>
+        </label>
+        <label>
+            Telefonnummer:<br>
+            <input type="text" name="phoneNumber" th:value="${customer.phoneNumber}"><br>
+        </label>
+        <label>
+            E-mail:<br>
+            <input type="email" name="email" th:value="${customer.email}"><br>
+        </label>
+        <button th:type="submit">Spara</button>
+    </th:block>
+</form>
+<div class="container">
+    <table class="table">
+        <tr>
+            <th scope="col">Personnummer</th>
+            <th scope="col">Förnamn</th>
+            <th scope="col">Efternamn</th>
+            <th scope="col">Adress</th>
+            <th scope="col">Postnummer</th>
+            <th scope="col">Stad</th>
+            <th scope="col">Land</th>
+            <th scope="col">Telefonnummer</th>
+            <th scope="col">E-mail</th>
+        </tr>
+        <th:block th:each="customer : ${customer}">
+            <tr class="table-row">
+                <td th:text="${customer.socialSecurityNumber}"></td>
+                <td th:text="${customer.firstName}"></td>
+                <td th:text="${customer.lastName}"></td>
+                <td th:text="${customer.address}"></td>
+                <td th:text="${customer.zipCode}"></td>
+                <td th:text="${customer.city}"></td>
+                <td th:text="${customer.country}"></td>
+                <td th:text="${customer.phoneNumber}"></td>
+                <td th:text="${customer.email}"></td>
+            </tr>
+        </th:block>
+    </table>
+</div>
 </body>
 </html>
