@@ -16,6 +16,7 @@ public class MovieController {
     @Autowired
     private MovieRepository movieRepository;
 
+    // List all movies...
     @GetMapping("")
     public String getMovies(Model model) {
         List<Movie> movies = (List<Movie>) movieRepository.findAll();
@@ -23,6 +24,7 @@ public class MovieController {
         return "movies/movies";
     }
 
+    // Search for movies by name, category and/or release year...
     @GetMapping("/searchMovies")
     public String search(Model model, @RequestParam(required = false) String name, @RequestParam(required = false) String category, @RequestParam(required = false) String releaseYear) {
         List<Movie> filteredMovies = movieRepository.findByNameContainsIgnoreCaseAndCategoryContainsIgnoreCaseAndReleaseYearContains(name, category, releaseYear);
@@ -30,10 +32,17 @@ public class MovieController {
         return "movies/movies";
     }
 
+    // Show details of a specific movie...
     @GetMapping("/movie/{productNumber}/details")
     public String getMovieByProductNumber(Model model, @PathVariable Long productNumber) {
         List<Movie> singleMovie = movieRepository.findByProductNumber(productNumber);
         model.addAttribute("singleMovie", singleMovie);
         return "movies/details";
+    }
+
+    // Add a new movie...
+    @GetMapping("/addmovie")
+    public String addMovieForm() {
+        return "movies/addmovie";
     }
 }

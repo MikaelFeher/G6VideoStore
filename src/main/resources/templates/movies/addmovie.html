@@ -5,25 +5,16 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <title>Filmer</title>
+    <title>Lägg till ny film</title>
 </head>
 <body>
 <div class="container">
     <div class="col-md-6 ml-auto mr-auto mt-5">
-        <th:block th:each="movie : ${singleMovie}">
-            <h1 th:text="${movie.name}"></h1>
-            <p th:text="'Utgivningsår: ' + ${movie.releaseYear}">1984</p>
-            <p th:text="${movie.description}">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab
-                consectetur consequuntur debitis dolorum eaque harum, ipsum iusto maxime modi molestiae nesciunt
-                nostrum, nulla optio placeat quas, quidem rerum ut voluptatem.
-            </p>
-            <p th:text="'Artikelnummer: ' + ${movie.productNumber}"></p>
-            <!-- IF MOVIE IS RENTED -->
-            <p th:if="${movie.rented}">Status: Uthyrd</p>
-            <!-- IF MOVIE IS NOT RENTED -->
-            <p th:unless="${movie.rented}">Status: Tillgänglig</p>
-        </th:block>
-        <a th:href="@{/movies}" class="btn btn-primary float-right">Tillbaka till filmer</a>
+        <form action="">
+
+            <button type="submit" class="btn btn-success">spara</button>
+            <a th:href="@{/movies}" class="btn btn-danger float-right">Avbryt</a>
+        </form>
         </a>
     </div>
 </div>
