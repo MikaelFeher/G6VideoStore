@@ -10,7 +10,9 @@ thead, tbody tr {
     table-layout:fixed;
 }
 thead {
-    width: calc( 100% - 1em )
+    width: 100%;
+    /* The Calculation makes the header less wide than the body, matter of taste... */
+    /*width: calc( 100% - 1em )*/
 }
 table {
     width:100%;
@@ -18,4 +20,8 @@ table {
 
 tr {
     cursor: pointer;
+}
+
+textarea[name=description] {
+    resize: none;
 }
