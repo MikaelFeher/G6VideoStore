@@ -34,6 +34,6 @@ public class MovieController {
     public String getMovieByProductNumber(Model model, @PathVariable Long productNumber) {
         List<Movie> singleMovie = movieRepository.findByProductNumber(productNumber);
         model.addAttribute("singleMovie", singleMovie);
-        return "movies/movie";
+        return "movies/details";
     }
 }

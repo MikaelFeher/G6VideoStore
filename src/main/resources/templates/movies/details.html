@@ -23,6 +23,8 @@
             <!-- IF MOVIE IS NOT RENTED -->
             <p th:unless="${movie.rented}">Status: Tillgänglig</p>
         </th:block>
+        <a th:href="@{/movies}" class="btn btn-primary">Tillbaka till filmer</button>
+        </a>
     </div>
 </div>
 
