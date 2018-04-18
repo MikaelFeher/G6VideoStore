@@ -18,7 +18,7 @@ public class Movie {
     private boolean rented;
     private List<RentedMovie> rentedMovies;
 
-    protected Movie() {
+    public Movie() {
     }
 
     public Movie(String name, String description, String releaseYear, String category, String format, boolean rented) {

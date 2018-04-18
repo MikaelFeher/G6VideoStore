@@ -35,14 +35,21 @@ public class MovieController {
     // Show details of a specific movie...
     @GetMapping("/movie/{productNumber}/details")
     public String getMovieByProductNumber(Model model, @PathVariable Long productNumber) {
-        List<Movie> singleMovie = movieRepository.findByProductNumber(productNumber);
-        model.addAttribute("singleMovie", singleMovie);
+        model.addAttribute("singleMovie", movieRepository.findByProductNumber(productNumber));
         return "movies/details";
     }
 
     // Add a new movie...
     @GetMapping("/addmovie")
-    public String addMovieForm() {
+    public String addMovie(Model model) {
+        model.addAttribute("newMovie", new Movie());
+        return "movies/addmovie";
+    }
+
+    @PostMapping("/addmovie")
+    public String addMovie(@ModelAttribute("newMovie") Movie newMovie) {
+        System.out.println("New movie added, name: " + newMovie.getName());
+        movieRepository.save(newMovie);
         return "movies/addmovie";
     }
 }

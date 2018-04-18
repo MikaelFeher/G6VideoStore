@@ -11,7 +11,7 @@ import static org.hibernate.hql.internal.antlr.SqlTokenTypes.FROM;
 import static org.hibernate.loader.Loader.SELECT;
 
 public interface MovieRepository extends CrudRepository<Movie, Long> {
-    List<Movie> findByProductNumber(Long productNumber);
+    Movie findByProductNumber(Long productNumber);
     List<Movie> findByName(String name);
     List<Movie> findByCategory(String category);
     List<Movie> findByReleaseYear(String releaseYear);
