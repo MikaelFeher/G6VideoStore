@@ -1,4 +1,4 @@
-package com.g6.video_rental.controller;
+package com.g6.video_rental.controller.Customer;
 
 import com.g6.video_rental.domain.Entities.Customer;
 import com.g6.video_rental.domain.repository.CustomerRepository;

@@ -1,7 +1,8 @@
-package com.g6.video_rental.controller;
+package com.g6.video_rental.controller.Customer;
 
 import com.g6.video_rental.domain.Entities.Customer;
 import com.g6.video_rental.domain.repository.CustomerQueryRepository;
+import com.g6.video_rental.domain.repository.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -9,13 +10,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @RequestMapping("customer")
-public class AddCustomerController {
+public class ModifyCustomerController {
     
     @Autowired
     private CustomerQueryRepository customerQueryRepository;
+
+    @Autowired
+    private CustomerRepository customerRepository;
     
     @RequestMapping("/addcustomer")
-    public String redirect(Customer customer) {
+    public String modifyCustomer(Customer customer) {
         updateCustomerTable(customer);
         return "redirect:/customer/customer?socialSecurityNumber=" + customer.getSocialSecurityNumber();
     }

@@ -46,36 +46,63 @@
             E-mail:<br>
             <input type="email" name="email" th:value="${customer.email}"><br>
         </label>
-        <button th:type="submit">Spara</button>
+        <button th:type="submit" name="action" value="change">Spara</button>
     </th:block>
 </form>
+
 <div class="container">
+    <h2>Hyrda Filmer</h2>
     <table class="table">
         <tr>
-            <th scope="col">Personnummer</th>
-            <th scope="col">Förnamn</th>
-            <th scope="col">Efternamn</th>
-            <th scope="col">Adress</th>
-            <th scope="col">Postnummer</th>
-            <th scope="col">Stad</th>
-            <th scope="col">Land</th>
-            <th scope="col">Telefonnummer</th>
-            <th scope="col">E-mail</th>
+            <th scope="col">Film id</th>
+            <th scope="col">Namn</th>
+            <th scope="col">Hyrdatum</th>
+            <th scope="col">Åtelämningsdatum</th>
+            <th scope="col"></th>
         </tr>
-        <th:block th:each="customer : ${customer}">
+
+        <th:block th:each="rentedmovie : ${rentedmovies}">
             <tr class="table-row">
-                <td th:text="${customer.socialSecurityNumber}"></td>
-                <td th:text="${customer.firstName}"></td>
-                <td th:text="${customer.lastName}"></td>
-                <td th:text="${customer.address}"></td>
-                <td th:text="${customer.zipCode}"></td>
-                <td th:text="${customer.city}"></td>
-                <td th:text="${customer.country}"></td>
-                <td th:text="${customer.phoneNumber}"></td>
-                <td th:text="${customer.email}"></td>
+                <td th:text="${rentedmovie.id}"></td>
+                <td th:text="${rentedmovie.movie.name}"></td>
+                <td th:text="${rentedmovie.rentedDate}"></td>
+                <td th:text="${rentedmovie.returnedDate}"></td>
+                <td scope="col">
+                    <button th:type="submit" name="action" value="delete">Ta bort</button>
+                </td>
             </tr>
         </th:block>
     </table>
 </div>
+
+<div class="container">
+    <h2>Filmhyrningshistorik</h2>
+    <table class="table">
+        <tr>
+            <th scope="col">Film id</th>
+            <th scope="col">Namn</th>
+            <th scope="col">Hyrdatum</th>
+        </tr>
+
+        <th:block th:each="rentedmovie : ${rentedmovieshistory}">
+            <tr class="table-row">
+                <td th:text="${rentedmovie.id}"></td>
+                <td th:text="${rentedmovie.movie.name}"></td>
+                <td th:text="${rentedmovie.rentedDate}"></td>
+            </tr>
+        </th:block>
+    </table>
+</div>
+
 </body>
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 </html>
