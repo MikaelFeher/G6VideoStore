@@ -11,13 +11,13 @@
 <body>
 <div class="container">
     <div class="row">
-        <form th:action="@{/movies/searchMovies}" th:object="${movies}" method="GET" class="form-group col-md-4 ml-auto mr-auto" >
+        <form th:action="@{/movies/searchMovies}" th:object="${movies}" method="GET" class="form-group col-md-12 ml-auto mr-auto" >
             <div class="row mt-3 ml-auto mr-auto col-md-12">
-                <input type="text" name="name" class="form-control" placeholder="Titel...">
-                <input type="text" name="category" class="form-control mt-2" placeholder="Kategori...">
-                <input type="text" name="releaseYear" class="form-control mt-2" placeholder="Utgivningsår...">
-                <button class="btn btn-success btn-block mt-2" value="Submit">Sök</button>
-                <a th:href="@{/movies/addmovie}" class="btn btn-outline-info btn-block mt-2">Lägg till ny film</a>
+                <input type="text" name="name" class="form-control mt-2 col-md-3" placeholder="Titel...">
+                <input type="text" name="category" class="form-control mt-2 ml-2 col-md-3" placeholder="Kategori...">
+                <input type="text" name="releaseYear" class="form-control mt-2 ml-2 col-md-3" placeholder="Utgivningsår...">
+                <button class="btn btn-success mt-2 ml-2 col-md-1" value="Submit">Sök</button>
+                <a th:href="@{/movies/addmovie}" class="btn btn-outline-info mt-2 ml-2">Lägg till ny film</a>
             </div>
         </form>
     </div>
