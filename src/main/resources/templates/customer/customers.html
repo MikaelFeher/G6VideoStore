@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Title</title>
+    <script type="text/javascript">
+        function customerInformation(socialSecurityNumber) {
+            window.location.assign(`/customer/customer?socialSecurityNumber=${socialSecurityNumber}`);
+        }
+    </script>
+</head>
+<body>
+
+<div class="container">
+<div class="row">
+    <form th:action="@{/customer/searchcustomers}" th:object="${customer}" method="get" class="form-group col-md-4 ml-auto mr-auto" >
+        <div class="row mt-3 ml-auto mr-auto col-md-12">
+            <input type="text" name="socialSecurityNumber" class="form-control" placeholder="Personnummer">
+            <input type="text" name="firstName" class="form-control mt-2" placeholder="Förnamn">
+            <input type="text" name="lastName" class="form-control mt-2" placeholder="Efternamn">
+            <button class="btn btn-success btn-block mt-2" value="Submit">Sök</button>
+            <!--<a th:href="@{/customer/addmovie}" class="btn btn-outline-info btn-block mt-2">Lägg till ny film</a>-->
+        </div>
+    </form>
+</div>
+
+<div class="container">
+    <table class="table">
+        <tr>
+            <th scope="col">Personnummer</th>
+            <th scope="col">Förnamn</th>
+            <th scope="col">Efternamn</th>
+            <th scope="col">Adress</th>
+            <th scope="col">Postnummer</th>
+            <th scope="col">Stad</th>
+            <th scope="col">Land</th>
+            <th scope="col">Telefonnummer</th>
+            <th scope="col">E-mail</th>
+        </tr>
+        <th:block th:each="customer : ${customers}">
+        <tr class="table-row"th:onclick="'customerInformation(\'' + ${customer.socialSecurityNumber}+ '\')'">
+            <td th:text="${customer.socialSecurityNumber}"></td>
+            <td th:text="${customer.firstName}"></td>
+            <td th:text="${customer.lastName}"></td>
+            <td th:text="${customer.address}"></td>
+            <td th:text="${customer.zipCode}"></td>
+            <td th:text="${customer.city}"></td>
+            <td th:text="${customer.country}"></td>
+            <td th:text="${customer.phoneNumber}"></td>
+            <td th:text="${customer.email}"></td>
+        </tr>
+        </th:block>
+    </table>
+</div>
+
+</body>
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+
+<!-- Until I know where to put them since we are missing a static folder -->
+
+<style type="text/css">
+    .table-row{
+        cursor:pointer;
+    }
+</style>
+</html>

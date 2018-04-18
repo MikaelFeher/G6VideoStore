@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>Att göra: Få med information om vad som klickades!</h1>
+
+<form method="get" th:object="${customer}" th:action="@{/customer/addcustomer}">
+    <th:block th:each="customer : ${customer}">
+        <label>
+            Personnummer:<br>
+            <input type="text" name="socialSecurityNumber" th:value="${customer.socialSecurityNumber}"><br>
+        </label>
+        <label>
+            Förnamn:<br>
+            <input type="text" name="firstName" th:value="${customer.firstName}"><br>
+        </label>
+        <label>
+            Efternamn:<br>
+            <input type="text" name="lastName" th:value="${customer.lastName}"><br>
+        </label>
+        <label>
+            Adress:<br>
+            <input type="text" name="address" th:value="${customer.address}"><br>
+        </label>
+        <label>
+            Postnummer:<br>
+            <input type="text" name="zipCode" th:value="${customer.zipCode}"><br>
+        </label>
+        <label>
+            Stad:<br>
+            <input type="text" name="city" th:value="${customer.city}"><br>
+        </label>
+        <label>
+            Land:<br>
+            <input type="text" name="country" th:value="${customer.country}"><br>
+        </label>
+        <label>
+            Telefonnummer:<br>
+            <input type="text" name="phoneNumber" th:value="${customer.phoneNumber}"><br>
+        </label>
+        <label>
+            E-mail:<br>
+            <input type="email" name="email" th:value="${customer.email}"><br>
+        </label>
+        <button th:type="submit" name="action" value="change">Spara</button>
+    </th:block>
+</form>
+
+<div class="container">
+    <h2>Hyrda Filmer</h2>
+    <table class="table">
+        <tr>
+            <th scope="col">Film id</th>
+            <th scope="col">Namn</th>
+            <th scope="col">Hyrdatum</th>
+            <th scope="col">Åtelämningsdatum</th>
+            <th scope="col"></th>
+        </tr>
+
+        <th:block th:each="rentedmovie : ${rentedmovies}">
+            <tr class="table-row">
+                <td th:text="${rentedmovie.id}"></td>
+                <td th:text="${rentedmovie.movie.name}"></td>
+                <td th:text="${rentedmovie.rentedDate}"></td>
+                <td th:text="${rentedmovie.returnedDate}"></td>
+                <td scope="col">
+                    <button th:type="submit" name="action" value="delete">Lämna in</button>
+                </td>
+            </tr>
+        </th:block>
+    </table>
+</div>
+
+<div class="container">
+    <h2>Filmhyrningshistorik</h2>
+    <table class="table">
+        <tr>
+            <th scope="col">Film id</th>
+            <th scope="col">Namn</th>
+            <th scope="col">Hyrdatum</th>
+        </tr>
+
+        <th:block th:each="rentedmovie : ${rentedmovieshistory}">
+            <tr class="table-row">
+                <td th:text="${rentedmovie.id}"></td>
+                <td th:text="${rentedmovie.movie.name}"></td>
+                <td th:text="${rentedmovie.rentedDate}"></td>
+            </tr>
+        </th:block>
+    </table>
+</div>
+
+</body>
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+</html>
