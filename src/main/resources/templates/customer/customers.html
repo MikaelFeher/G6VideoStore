@@ -15,6 +15,19 @@
 <body>
 
 <div class="container">
+<div class="row">
+    <form th:action="@{/customer/searchcustomers}" th:object="${customer}" method="get" class="form-group col-md-4 ml-auto mr-auto" >
+        <div class="row mt-3 ml-auto mr-auto col-md-12">
+            <input type="text" name="socialSecurityNumber" class="form-control" placeholder="Personnummer">
+            <input type="text" name="firstName" class="form-control mt-2" placeholder="Förnamn">
+            <input type="text" name="lastName" class="form-control mt-2" placeholder="Efternamn">
+            <button class="btn btn-success btn-block mt-2" value="Submit">Sök</button>
+            <!--<a th:href="@{/customer/addmovie}" class="btn btn-outline-info btn-block mt-2">Lägg till ny film</a>-->
+        </div>
+    </form>
+</div>
+
+<div class="container">
     <table class="table">
         <tr>
             <th scope="col">Personnummer</th>

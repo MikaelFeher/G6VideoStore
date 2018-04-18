@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.List;
+
 @Controller
 @RequestMapping("customer")
 public class CustomerController {
@@ -23,4 +25,11 @@ public class CustomerController {
         model.addAttribute("customer", customerRepository.findBySocialSecurityNumber(socialSecurityNumber));
         return "customer/customer";
     }
+
+    /*@GetMapping("/searchCustomers")
+    public String search(Model model, @RequestParam(required = false) String socialSecurityNumber, @RequestParam(required = false) String firstName, @RequestParam(required = false) String lastName) {
+        List<Customer> filteredCustomers = customerRepository.findBySocialSecurityNumberContainsIgnoreCaseAndFirstNameContainsIgnoreCaseAndLastNameContains(socialSecurityNumber, firstName, lastName);
+        model.addAttribute("customer", filteredCustomers);
+        return "customer/customers";
+    }*/
 }
