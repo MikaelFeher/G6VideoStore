@@ -7,3 +7,7 @@ function showMovieDetails(productNumber) {
 function editMovieDetails(productNumber) {
     window.location.assign(`/movies/movie/${productNumber}/edit`);
 }
+
+function deleteMovie(productNumber) {
+    window.location.assign(`/movies/movie/${productNumber}/delete`);
+}

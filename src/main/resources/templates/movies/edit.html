@@ -12,12 +12,13 @@
 <div class="container">
     <div class="col-md-6 ml-auto mr-auto mt-5">
         <form th:action="@{/movies/movie/__${movieToEdit.productNumber}__/edit}" th:object="${movieToEdit}" method="post" class="form-group">
+            <a th:href="@{/movies}" class="btn btn-primary col-md-2 float-right mb-2 ml-2">Tillbaka till filmer</a>
             <input type="text" class="form-control" name="name" id="name" th:value="*{name}" th:required="required"/>
             <textarea class="form-control mt-2" name="description" id="description" rows="5" th:text="*{description}" th:required="required"></textarea>
             <input type="text" class="form-control mt-2" name="category" id="category" th:value="*{category}" th:required="required"/>
             <input type="text" class="form-control mt-2" name="releaseYear" id="release_year" th:value="*{releaseYear}" th:required="required"/>
             <input type="text" class="form-control mt-2" name="format" id="format" th:value="*{format}" th:required="required"/>
-            <a th:href="@{/movies}" class="btn btn-danger col-md-2 float-right mt-2 ml-2">Avbryt</a>
+            <a th:href="@{/movies/movie/__*{productNumber}__/delete}" class="btn btn-danger col-md-3 float-right mt-2 ml-2">Radera Film</a>
             <button type="submit" class="btn btn-success col-md-2 mt-2 float-right">Spara</button>
         </form>
     </div>

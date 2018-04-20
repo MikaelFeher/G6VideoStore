@@ -1,9 +1,9 @@
 package com.g6.video_rental.domain.Entities;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import com.g6.video_rental.domain.repository.RentedMovieRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import javax.persistence.*;
 import java.util.List;
 
 @Entity
@@ -88,7 +88,7 @@ public class Movie {
         this.rented = rented;
     }
 
-    @OneToMany(mappedBy = "movie")
+    @OneToMany()
     public List<RentedMovie> getRentedMovies() {
         return rentedMovies;
     }
@@ -96,6 +96,19 @@ public class Movie {
     public void setRentedMovies(List<RentedMovie> rentedMovies) {
         this.rentedMovies = rentedMovies;
     }
+
+
+    /* Attempt to delete a movie since the connection to the rentedMovie entity seems to prevent deleting the movie */
+//    @Autowired
+//    private RentedMovieRepository rentedMovieRepository;
+//
+//    @PreRemove
+//    private void removeFromRentedMovies() {
+//        Iterable<RentedMovie> rms = rentedMovieRepository.findAll();
+//        for (RentedMovie rm : rms) {
+//            rm.getMovie();
+//        }
+//    }
 
     @Override
     public String toString() {

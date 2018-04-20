@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -65,6 +66,19 @@ public class MovieController {
     @PostMapping("/movie/{productNumber}/edit")
     public String editMovieDetails(@ModelAttribute("movieToEdit") Movie movieToEdit) {
         movieRepository.save(movieToEdit);
+        return "redirect:" + MOVIES_MAIN;
+    }
+
+    // Delete selected movie
+    @GetMapping("/movie/{productNumber}/delete")
+    public String deleteSelectedMovie(Model model, @PathVariable Long productNumber) {
+        model.addAttribute("movieToDelete", movieRepository.findByProductNumber(productNumber));
+        return "movies/delete";
+    }
+
+    @DeleteMapping("/movie/delete")
+    public String deleteSelectedMovie(@ModelAttribute("movieToDelete") Movie movieToDelete) {
+        movieRepository.deleteById(movieToDelete.getProductNumber());
         return "redirect:" + MOVIES_MAIN;
     }
 }
