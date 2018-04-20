@@ -13,6 +13,8 @@ import java.util.List;
 @RequestMapping("/movies")
 public class MovieController {
 
+    private String MOVIES_MAIN = "/movies";
+
     @Autowired
     private MovieRepository movieRepository;
 
@@ -34,7 +36,7 @@ public class MovieController {
 
     // Show details of a specific movie...
     @GetMapping("/movie/{productNumber}/details")
-    public String getMovieByProductNumber(Model model, @PathVariable Long productNumber) {
+    public String showMovieDetails(Model model, @PathVariable Long productNumber) {
         model.addAttribute("singleMovie", movieRepository.findByProductNumber(productNumber));
         return "movies/details";
     }
@@ -50,6 +52,19 @@ public class MovieController {
     public String addMovie(@ModelAttribute("newMovie") Movie newMovie) {
         System.out.println("New movie added, name: " + newMovie.getName());
         movieRepository.save(newMovie);
-        return "redirect:/";
+        return "redirect:" + MOVIES_MAIN;
+    }
+
+    // Edit movie details...
+    @GetMapping("/movie/{productNumber}/edit")
+    public String editMovieDetails(Model model, @PathVariable Long productNumber) {
+        model.addAttribute("movieToEdit", movieRepository.findByProductNumber(productNumber));
+        return "movies/edit";
+    }
+
+    @PostMapping("/movie/{productNumber}/edit")
+    public String editMovieDetails(@ModelAttribute("movieToEdit") Movie movieToEdit) {
+        movieRepository.save(movieToEdit);
+        return "redirect:" + MOVIES_MAIN;
     }
 }

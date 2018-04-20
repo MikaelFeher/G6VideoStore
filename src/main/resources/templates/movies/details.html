@@ -5,26 +5,26 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <title>Filmer</title>
+    <title th:text="${singleMovie.name} + ' | Info'">Filmer</title>
 </head>
 <body>
 <div class="container">
     <div class="col-md-6 ml-auto mr-auto mt-5">
-        <th:block th:each="movie : ${singleMovie}">
-            <h1 th:text="${movie.name}"></h1>
-            <p th:text="'Utgivningsår: ' + ${movie.releaseYear}">1984</p>
-            <p th:text="${movie.description}">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab
+        <th:block th:object="${singleMovie}" >
+            <h1 th:text="*{name}"></h1>
+            <p th:text="'Utgivningsår: ' + *{releaseYear}">1984</p>
+            <p th:text="*{description}">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab
                 consectetur consequuntur debitis dolorum eaque harum, ipsum iusto maxime modi molestiae nesciunt
                 nostrum, nulla optio placeat quas, quidem rerum ut voluptatem.
             </p>
-            <p th:text="'Artikelnummer: ' + ${movie.productNumber}"></p>
+            <p th:text="'Artikelnummer: ' + *{productNumber}"></p>
             <!-- IF MOVIE IS RENTED -->
-            <p th:if="${movie.rented}">Status: Uthyrd</p>
+            <p th:if="*{rented}">Status: Uthyrd</p>
             <!-- IF MOVIE IS NOT RENTED -->
-            <p th:unless="${movie.rented}">Status: Tillgänglig</p>
+            <p th:unless="*{rented}">Status: Tillgänglig</p>
+            <button th:onclick="'editMovieDetails(\'' + *{productNumber}+ '\')'" class="btn btn-primary float-right">Redigera</button>
         </th:block>
         <a th:href="@{/movies}" class="btn btn-primary float-right">Tillbaka till filmer</a>
-        </a>
     </div>
 </div>
 

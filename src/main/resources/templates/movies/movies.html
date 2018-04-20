@@ -39,7 +39,7 @@
         </thead>
         <tbody>
         <th:block th:each="movie : ${movies}">
-            <tr th:onclick="'movieDetails(\'' + ${movie.productNumber}+ '\')'">
+            <tr th:onclick="'showMovieDetails(\'' + ${movie.productNumber}+ '\')'">
                 <td th:text="${movie.productNumber}"></td>
                 <td th:text="${movie.name}"></td>
                 <td th:text="${movie.description}">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab
