@@ -50,6 +50,6 @@ public class MovieController {
     public String addMovie(@ModelAttribute("newMovie") Movie newMovie) {
         System.out.println("New movie added, name: " + newMovie.getName());
         movieRepository.save(newMovie);
-        return "movies/addmovie";
+        return "redirect:/";
     }
 }
