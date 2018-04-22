@@ -24,6 +24,7 @@ public class MovieController {
     public String getMovies(Model model) {
         List<Movie> movies = (List<Movie>) movieRepository.findAll();
         model.addAttribute("movies", movies);
+        model.addAttribute("title", "Filmer");
         return "movies/movies";
     }
 
@@ -38,7 +39,9 @@ public class MovieController {
     // Show details of a specific movie...
     @GetMapping("/movie/{productNumber}/details")
     public String showMovieDetails(Model model, @PathVariable Long productNumber) {
-        model.addAttribute("singleMovie", movieRepository.findByProductNumber(productNumber));
+        Movie singleMovie = movieRepository.findByProductNumber(productNumber);
+        model.addAttribute("singleMovie", singleMovie);
+        model.addAttribute("title", "Info | " + singleMovie.getName());
         return "movies/details";
     }
 
@@ -46,6 +49,7 @@ public class MovieController {
     @GetMapping("/addmovie")
     public String addMovie(Model model) {
         model.addAttribute("newMovie", new Movie());
+        model.addAttribute("title", "Lägg till ny film");
         return "movies/addmovie";
     }
 
@@ -59,7 +63,9 @@ public class MovieController {
     // Edit movie details...
     @GetMapping("/movie/{productNumber}/edit")
     public String editMovieDetails(Model model, @PathVariable Long productNumber) {
-        model.addAttribute("movieToEdit", movieRepository.findByProductNumber(productNumber));
+        Movie movieToEdit = movieRepository.findByProductNumber(productNumber);
+        model.addAttribute("movieToEdit", movieToEdit);
+        model.addAttribute("title", "Redigera | " + movieToEdit.getName());
         return "movies/edit";
     }
 
@@ -72,7 +78,9 @@ public class MovieController {
     // Delete selected movie
     @GetMapping("/movie/{productNumber}/delete")
     public String deleteSelectedMovie(Model model, @PathVariable Long productNumber) {
-        model.addAttribute("movieToDelete", movieRepository.findByProductNumber(productNumber));
+        Movie movieToDelete = movieRepository.findByProductNumber(productNumber);
+        model.addAttribute("movieToDelete", movieToDelete);
+        model.addAttribute("title", "Radera | " + movieToDelete.getName());
         return "movies/delete";
     }
 
