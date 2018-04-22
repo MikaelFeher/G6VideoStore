@@ -5,13 +5,12 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <title th:text="${movieToDelete.name} + ' | Radera'">Filmer</title>
+    <title th:text=" 'Radera | ' + ${movieToDelete.name}">Filmer</title>
 </head>
 <body>
 <div class="container">
     <div class="col-md-6 ml-auto mr-auto mt-5">
         <form th:action="@{/movies/movie/__${movieToDelete.productNumber}__/edit}" th:object="${movieToDelete}" method="post" >
-            <a th:href="@{/movies}" class="btn btn-primary float-right">Tillbaka till filmer</a>
             <h1 th:text="*{name}"></h1>
             <p th:text="'Utgivningsår: ' + *{releaseYear}">1984</p>
             <p th:text="*{description}">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab
@@ -24,7 +23,8 @@
             <!-- IF MOVIE IS NOT RENTED -->
             <p th:unless="*{rented}">Status: Tillgänglig</p>
             <p th:text="'Vill du verkligen RADERA ' + *{name} + '? Går ej att återställa!'" class="alert alert-danger"></p>
-            <button th:type="submit" class="btn btn-primary float-right">RADERA</button>
+            <button th:type="submit" class="btn btn-danger float-right ml-2">RADERA</button>
+            <a th:href="@{/movies}" class="btn btn-primary float-right">Tillbaka till filmer</a>
         </form>
     </div>
 </div>

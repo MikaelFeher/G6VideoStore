@@ -11,6 +11,7 @@
 <body>
 <div class="container">
     <div class="col-md-6 ml-auto mr-auto mt-5">
+        <h2>Lägg till ny film</h2>
         <form th:action="@{/movies/addmovie}" th:object="${movie}" method="post" class="form-group">
             <input type="text" class="form-control" name="name" id="name" placeholder="Titel..." th:required="required">
             <textarea class="form-control mt-2" name="description" id="description" rows="5" placeholder="Handling..." th:required="required"></textarea>

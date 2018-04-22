@@ -22,7 +22,7 @@
             <p th:if="*{rented}">Status: Uthyrd</p>
             <!-- IF MOVIE IS NOT RENTED -->
             <p th:unless="*{rented}">Status: Tillgänglig</p>
-            <button th:onclick="'editMovieDetails(\'' + *{productNumber}+ '\')'" class="btn btn-primary float-right">Redigera</button>
+            <button th:onclick="'editMovieDetails(\'' + *{productNumber}+ '\')'" class="btn btn-warning float-right ml-2">Redigera</button>
         </th:block>
         <a th:href="@{/movies}" class="btn btn-primary float-right">Tillbaka till filmer</a>
     </div>
