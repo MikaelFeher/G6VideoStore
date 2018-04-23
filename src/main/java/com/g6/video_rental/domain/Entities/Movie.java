@@ -1,9 +1,9 @@
 package com.g6.video_rental.domain.Entities;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import com.g6.video_rental.domain.repository.RentedMovieRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import javax.persistence.*;
 import java.util.List;
 
 @Entity
@@ -12,19 +12,19 @@ public class Movie {
     private long productNumber;
     private String name;
     private String description;
-    private String releaseDate;
+    private String releaseYear;
     private String category;
     private String format;
     private boolean rented;
     private List<RentedMovie> rentedMovies;
 
-    protected Movie() {
+    public Movie() {
     }
 
-    public Movie(String name, String description, String releaseDate, String category, String format, boolean rented) {
+    public Movie(String name, String description, String releaseYear, String category, String format, boolean rented) {
         this.name = name;
         this.description = description;
-        this.releaseDate = releaseDate;
+        this.releaseYear = releaseYear;
         this.category = category;
         this.format = format;
         this.rented = rented;
@@ -56,12 +56,12 @@ public class Movie {
         this.description = description;
     }
 
-    public String getReleaseDate() {
-        return releaseDate;
+    public String getReleaseYear() {
+        return releaseYear;
     }
 
-    public void setReleaseDate(String releaseDate) {
-        this.releaseDate = releaseDate;
+    public void setReleaseYear(String releaseYear) {
+        this.releaseYear = releaseYear;
     }
 
     public String getCategory() {
@@ -88,7 +88,7 @@ public class Movie {
         this.rented = rented;
     }
 
-    @OneToMany(mappedBy = "movie")
+    @OneToMany()
     public List<RentedMovie> getRentedMovies() {
         return rentedMovies;
     }
@@ -97,13 +97,26 @@ public class Movie {
         this.rentedMovies = rentedMovies;
     }
 
+
+    /* Attempt to delete a movie since the connection to the rentedMovie entity seems to prevent deleting the movie */
+//    @Autowired
+//    private RentedMovieRepository rentedMovieRepository;
+//
+//    @PreRemove
+//    private void removeFromRentedMovies() {
+//        Iterable<RentedMovie> rms = rentedMovieRepository.findAll();
+//        for (RentedMovie rm : rms) {
+//            rm.getMovie();
+//        }
+//    }
+
     @Override
     public String toString() {
         return "Movie{" +
                 "productNumber=" + productNumber +
                 ", name='" + name + '\'' +
                 ", description='" + description + '\'' +
-                ", releaseDate='" + releaseDate + '\'' +
+                ", releaseYear='" + releaseYear + '\'' +
                 ", category='" + category + '\'' +
                 ", format='" + format + '\'' +
                 ", rented=" + rented +
