@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.List;
 
@@ -36,7 +37,7 @@ public class RentMovieController {
 
     @GetMapping("/rentmovie")
     public String rentMoviesPage(Model model){
-        model.addAttribute("title", "Uthyrning");
+        model.addAttribute("title", "Ny Uthyrning");
         return "rentmovies/rentmovie";
     }
 
@@ -61,6 +62,7 @@ public class RentMovieController {
 
         RentedMovie rm = new RentedMovie();
         rm.setCustomer(c);
+//        rm.setRentedDate(LocalDate.now().minusDays(2));
         rentedMovieRepository.save(rm);
 
         moviesToRent.stream().forEach(m -> {
@@ -70,5 +72,13 @@ public class RentMovieController {
         movieRepository.saveAll(moviesToRent);
 
         return "redirect:/rentedmovies";
+    }
+
+    @GetMapping("/latemovies")
+    public String getLateMovies(Model model) {
+        List<RentedMovie> lateMovies = rentedMovieRepository.findByRentedDateLessThan(LocalDate.now().minusDays(1));
+        model.addAttribute("lateMovies", lateMovies);
+        model.addAttribute("title", "Försenade Inlämningar");
+        return "rentmovies/latemovies";
     }
 }

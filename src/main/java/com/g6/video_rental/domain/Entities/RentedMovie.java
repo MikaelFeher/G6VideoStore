@@ -1,6 +1,8 @@
 package com.g6.video_rental.domain.Entities;
 
 import javax.persistence.*;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -10,8 +12,8 @@ public class RentedMovie {
     private Long id;
     private Customer customer;
     private List<Movie> movies;
-    private Date rentedDate;
-    private Date returnedDate;
+    private LocalDate rentedDate;
+    private LocalDate returnedDate;
 
 //    public RentedMovie() {
 //    }
@@ -19,22 +21,22 @@ public class RentedMovie {
     public RentedMovie() {
 //        this.customer = customer;
 //        this.movies = movies;
-        this.rentedDate = new Date();
+        this.rentedDate = LocalDate.now();
     }
 
-    public Date getRentedDate() {
+    public LocalDate getRentedDate() {
         return rentedDate;
     }
 
-    public void setRentedDate(Date rentedDate) {
+    public void setRentedDate(LocalDate rentedDate) {
         this.rentedDate = rentedDate;
     }
 
-    public Date getReturnedDate() {
+    public LocalDate getReturnedDate() {
         return returnedDate;
     }
 
-    public void setReturnedDate(Date returnedDate) {
+    public void setReturnedDate(LocalDate returnedDate) {
         this.returnedDate = returnedDate;
     }
 
