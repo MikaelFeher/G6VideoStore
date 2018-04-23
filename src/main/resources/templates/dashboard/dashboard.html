@@ -6,11 +6,11 @@
 <div th:replace="layouts/layoutfragments :: navbar"></div>
 
 <div class="container">
-    <div class="row mt-4">
-
-        <div class=" col-md-5">
+    <div class="row mt-5">
+        <div class=" col-md-6">
             <table class="table table-striped">
-                <thead>
+                <thead class="thead-dark">
+                <h3>Försenade filmer</h3>
                 <tr>
                     <th scope="col">Kundnummer</th>
                     <th scope="col">Namn</th>
@@ -43,20 +43,22 @@
             </table>
         </div>
 
-        <div class=" col-md-7 text-center">
-            <a href="#" th:href="@{/movies}" class="btn btn-primary btn-block btn-lg">Lägg till filmer</a>
+        <div class=" col-md-6 text-center mt-3">
+            <hr class="my-4">
+
+            <a href="#" th:href="@{/movies/addmovie}" class="btn btn-primary btn-block btn-lg">Lägg till filmer</a>
 
             <hr class="my-4">
 
             <a href="#" th:href="@{/movies}" class="btn btn-primary btn-lg customButton">Hyr ut filmer</a>
-            <a href="#" th:href="@{/movies}" class="btn btn-primary btn-lg customButton">Returnera filmer</a>
+            <a href="#" th:href="@{/movies}" class="btn btn-primary btn-lg customButton">Returnera film</a>
             <a href="#" th:href="@{/movies}" class="btn btn-primary btn-lg customButton">Lägg till kund</a>
 
             <hr class="my-4">
 
             <a href="#" th:href="@{/customer/customers}" class="btn btn-primary btn-lg customButton">Kunder</a>
-            <a href="#" th:href="@{/movies}" class="btn btn-primary btn-lg col-md-3">Filmer</a>
-            <a href="#" th:href="@{/movies}" class="btn btn-primary btn-lg col-md-3">Uthyrda filmer</a>
+            <a href="#" th:href="@{/movies}" class="btn btn-primary btn-lg customButton">Filmer</a>
+            <a href="#" th:href="@{/movies}" class="btn btn-primary btn-lg customButton">Uthyrda filmer</a>
 
             <hr class="my-4">
 
