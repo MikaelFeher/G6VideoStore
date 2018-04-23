@@ -1,10 +1,51 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
 <body>
-
+<form method="post" th:object="${customer}" th:action="@{/customer/addcustomer}">
+    <!--<th:block th:each="customer : ${customer}">-->
+        <label>
+            Personnummer:<br>
+            <input type="text" name="socialSecurityNumber" placeholder="YYMMDD-XXXX"><br>
+        </label>
+        <label>
+            Förnamn:<br>
+            <input type="text" name="firstName" placeholder="Förnamn"><br>
+        </label>
+        <label>
+            Efternamn:<br>
+            <input type="text" name="lastName" placeholder="Efternamn"><br>
+        </label>
+        <label>
+            Adress:<br>
+            <input type="text" name="address" placeholder="Adress"><br>
+        </label>
+        <label>
+            Postnummer:<br>
+            <input type="text" name="zipCode" placeholder="XXXXX"><br>
+        </label>
+        <label>
+            Stad:<br>
+            <input type="text" name="city" placeholder="Stad"><br>
+        </label>
+        <label>
+            Land:<br>
+            <input type="text" name="country" th:value="Sverige"><br>
+        </label>
+        <label>
+            Telefonnummer:<br>
+            <input type="text" name="phoneNumber" placeholder="0701232323"><br>
+        </label>
+        <label>
+            E-mail:<br>
+            <input type="email" name="email"><br>
+        </label>
+        <button th:type="submit" name="action" value="change">Spara</button>
+    <!--</th:block>-->
+</form>
 </body>
 </html>

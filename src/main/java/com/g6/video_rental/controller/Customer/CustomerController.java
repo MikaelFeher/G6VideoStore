@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -57,10 +58,21 @@ public class CustomerController {
         return "redirect:/customer/customer?socialSecurityNumber=" + tempCustomer.getSocialSecurityNumber();
     }*/
 
-    @RequestMapping("/addcustomer")
+    @RequestMapping("/modifycustomer")
     public String modifyCustomer(Customer customer) {
         updateCustomerTable(customer);
         return "redirect:/customer/customer?socialSecurityNumber=" + customer.getSocialSecurityNumber();
+    }
+    
+    @RequestMapping("/addcustomer")
+    public String addCustomer(Model model) {
+        return "customer/addcustomer";
+    }
+    
+    @PostMapping("/addcustomer")
+    public String addCustomer(Customer customer) {
+        customerRepository.save(customer);
+        return "redirect:/customer/customers";
     }
 
     @GetMapping("/searchcustomers")
