@@ -9,16 +9,16 @@ import java.util.List;
 public class RentedMovie {
     private Long id;
     private Customer customer;
-    private Movie movie;
+    private List<Movie> movies;
     private Date rentedDate;
     private Date returnedDate;
 
-    public RentedMovie() {
-    }
+//    public RentedMovie() {
+//    }
 
-    public RentedMovie(Customer customer, Movie movie) {
-        this.customer = customer;
-        this.movie = movie;
+    public RentedMovie() {
+//        this.customer = customer;
+//        this.movies = movies;
         this.rentedDate = new Date();
     }
 
@@ -48,7 +48,7 @@ public class RentedMovie {
         this.id = id;
     }
 
-    @ManyToOne
+    @OneToOne
     public Customer getCustomer() {
         return customer;
     }
@@ -57,23 +57,15 @@ public class RentedMovie {
         this.customer = customer;
     }
 
-    @ManyToOne()
-    public Movie getMovie() {
-        return movie;
+    @OneToMany(mappedBy = "rentedMovie", cascade = CascadeType.ALL)
+    public List<Movie> getMovies() {
+        return movies;
     }
 
-    public void setMovie(Movie movie) {
-        this.movie = movie;
+    public void setMovies(List<Movie> movies) {
+        this.movies = movies;
     }
 
-    @Override
-    public String toString() {
-        return "RentedMovie{" +
-                "id=" + id +
-                ", customer=" + customer +
-                ", movie=" + movie +
-                ", rentedDate=" + rentedDate +
-                ", returnedDate=" + returnedDate +
-                '}';
-    }
+
+
 }

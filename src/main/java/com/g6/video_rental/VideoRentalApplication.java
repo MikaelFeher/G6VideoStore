@@ -11,6 +11,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
+import java.util.List;
+
 @SpringBootApplication
 public class VideoRentalApplication {
 
@@ -32,19 +34,23 @@ public class VideoRentalApplication {
             }
 
             // Adding customers to the db...
-            customerRepository.save(new Customer("770325-1234", "Mikael", "Feher", "Stadsparken 0", "12345", "Skurup", "Sverige", "0987654321" ,"mikael@test.com"));
+            Customer c = new Customer("770325-1234", "Mikael", "Feher", "Stadsparken 0", "12345", "Skurup", "Sverige", "0987654321" ,"mikael@test.com");
+            customerRepository.save(c);
+//            customerRepository.save(new Customer("770325-1234", "Mikael", "Feher", "Stadsparken 0", "12345", "Skurup", "Sverige", "0987654321" ,"mikael@test.com"));
             customerRepository.save(new Customer("820916-1234", "Max", "Barnell", "Drottninggatan 0", "12345", "Helsingborg", "Sverige", "0987654321" ,"maxb@test.com"));
             customerRepository.save(new Customer("970708-1234", "Ervin", "Jusfagic", "Rådhustorgrt 0", "12345", "Helsingborg", "Sverige", "0987654321" ,"ervinb@test.com"));
 
 
 
-//            // Customer renting a movie...
-//            RentedMovie rm = new RentedMovie(customer, movie);
+
+            // Customer renting a movie...
+//            RentedMovie rm = new RentedMovie();
+//            rm.setCustomer(c);
 //            rentedMovieRepository.save(rm);
-//            customer.getRentedMovies().add(rm);
 //
-//            System.out.println("Customer :" + customer.getRentedMovies());
-//            System.out.println("Customer 1: " + customer1.getRentedMovies());
+//            List<Movie> rentals = (List<Movie>) movieRepository.findAll();
+//            rentals.stream().forEach(m -> m.setRentedMovie(rm));
+//            movieRepository.saveAll(rentals);
         };
     }
 }

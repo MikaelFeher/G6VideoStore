@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en"
+      xmlns="http://www.w3.org/1999/xhtml">
+<head th:replace="layouts/layoutfragments :: head"></head>
+<body>
+<div th:replace="layouts/layoutfragments :: navbar"></div>
+<div class="container">
+    <div class="col-md-6 ml-auto mr-auto mt-5">
+        <h1>Uthyrning</h1>
+
+        <form th:action="@{/rentedmovies/rentmovie}" class="form-group" method="post">
+            <input type="text" class="form-control" name="socialSecurityNumber" placeholder="Personnummer...">
+            <div th:if="${errorMessage}">
+                <p th:text="${errorMessage}" class="alert alert-danger"></p>
+            </div>
+            <input type="text" class="form-control mt-2" name="movie1" placeholder="Artikelnummer...">
+            <input type="text" class="form-control mt-2" name="movie2" placeholder="Artikelnummer...">
+            <input type="text" class="form-control mt-2" name="movie3" placeholder="Artikelnummer...">
+            <a href="#" th:href="@{/dashboard}" class="btn btn-danger mt-2 ml-2 float-right">Avbryt</a>
+            <button th:type="submit" class="btn btn-success mt-2 float-right">Hyr ut</button>
+        </form>
+    </div>
+</div>
+<div th:replace="layouts/layoutfragments :: javascriptimports"></div>
+</body>
+</html>
