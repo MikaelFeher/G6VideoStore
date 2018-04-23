@@ -47,7 +47,6 @@ public class VideoRentalApplication {
             rentedMovieRepository.save(rm1);
             customer1.getRentedMovies().add(rm1);
 
-
             System.out.println("Customer :" + customer.getRentedMovies());
             System.out.println("Customer 1: " + customer1.getRentedMovies());
         };

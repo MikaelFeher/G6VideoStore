@@ -63,15 +63,27 @@
 
         <th:block th:each="rentedmovie : ${rentedmovies}">
             <tr class="table-row">
-                <td th:text="${rentedmovie.id}"></td>
-                <td th:text="${rentedmovie.movie.name}"></td>
-                <td th:text="${rentedmovie.rentedDate}"></td>
-                <td th:text="${rentedmovie.returnedDate}"></td>
-                <td scope="col">
-                    <button th:type="submit" name="action" value="delete">Lämna in</button>
-                </td>
+                <td scope="col" th:text="${rentedmovie.id}"></td>
+                <td scope="col" th:text="${rentedmovie.movie.name}"></td>
+                <td scope="col" th:text="${rentedmovie.rentedDate}"></td>
+                <td scope="col" th:text="${rentedmovie.returnedDate}"></td>
+                <td scope="col"></td>
             </tr>
         </th:block>
+            <tr>
+                <td scope="col"></td>
+                <td scope="col"></td>
+                <td scope="col"></td>
+                <td scope="col"></td>
+                <td scope="col">
+                    <form th:action="@{/customer/returnmovies}" th:object="${customer}" method="get">
+                        <th:block th:each="customer : ${customer}">
+                        <input type="hidden" name="socialSecurityNumber" th:value="${customer.socialSecurityNumber}" />
+                        <button type="submit">Lämna in</button>
+                        </th:block>
+                    </form>
+                </td>
+            </tr>
     </table>
 </div>
 
