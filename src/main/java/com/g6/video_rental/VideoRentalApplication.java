@@ -32,10 +32,9 @@ public class VideoRentalApplication {
             }
 
             // Adding customers to the db...
-            Customer customer = new Customer("770325-1234", "Mikael", "Feher", "Tulesholmsgatan 97", "27437", "Skurup", "Sverige", "0704619961" ,"mikael.feher@gmail.com");
-            Customer customer1 = new Customer("820916-1234", "Max", "Barnell", "Drottninggatan 0", "12345", "Helsingborg", "Sverige", "0987654321" ,"maxb@test.com");
-            customerRepository.save(customer);
-            customerRepository.save(customer1);
+            customerRepository.save(new Customer("770325-1234", "Mikael", "Feher", "Stadsparken 0", "12345", "Skurup", "Sverige", "0987654321" ,"mikael@test.com"));
+            customerRepository.save(new Customer("820916-1234", "Max", "Barnell", "Drottninggatan 0", "12345", "Helsingborg", "Sverige", "0987654321" ,"maxb@test.com"));
+            customerRepository.save(new Customer("970708-1234", "Ervin", "Jusfagic", "Rådhustorgrt 0", "12345", "Helsingborg", "Sverige", "0987654321" ,"ervinb@test.com"));
 
 
 

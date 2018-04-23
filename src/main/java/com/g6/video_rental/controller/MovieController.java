@@ -2,12 +2,12 @@ package com.g6.video_rental.controller;
 
 import com.g6.video_rental.domain.Entities.Movie;
 import com.g6.video_rental.domain.repository.MovieRepository;
+import com.g6.video_rental.domain.repository.RentedMovieRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -18,6 +18,8 @@ public class MovieController {
 
     @Autowired
     private MovieRepository movieRepository;
+    @Autowired
+    private RentedMovieRepository rentedMovieRepository;
 
     // List all movies...
     @GetMapping("")
@@ -79,13 +81,16 @@ public class MovieController {
     @GetMapping("/movie/{productNumber}/delete")
     public String deleteSelectedMovie(Model model, @PathVariable Long productNumber) {
         Movie movieToDelete = movieRepository.findByProductNumber(productNumber);
+        String deleteWarning = "Vill du verkligen RADERA " + movieToDelete.getName() + "?\nÅtgärden går ej att återställa!";
         model.addAttribute("movieToDelete", movieToDelete);
         model.addAttribute("title", "Radera | " + movieToDelete.getName());
+        model.addAttribute("deleteWarning", deleteWarning);
         return "movies/delete";
     }
 
-    @DeleteMapping("/movie/delete")
-    public String deleteSelectedMovie(@ModelAttribute("movieToDelete") Movie movieToDelete) {
+    @PostMapping("/movie/{productNumber}/delete")
+    public String deleteSelectedMovie(@PathVariable Long productNumber) {
+        Movie movieToDelete = movieRepository.findByProductNumber(productNumber);
         movieRepository.deleteById(movieToDelete.getProductNumber());
         return "redirect:" + MOVIES_MAIN;
     }
