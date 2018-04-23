@@ -1,14 +1,10 @@
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml"
                 xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
+<head th:replace="layouts/layoutfragments :: head"></head>
 <body>
-<h1>Att göra: Få med information om vad som klickades!</h1>
-
-<form method="get" th:object="${customer}" th:action="@{/customer/modifycustomer}">
+    <div th:replace="layouts/layoutfragments :: navbar"></div>
+<form method="post" th:object="${customer}" th:action="@{/customer/customer}">
     <th:block th:each="customer : ${customer}">
         <label>
             Personnummer:<br>
@@ -105,16 +101,6 @@
         </th:block>
     </table>
 </div>
-
+<div th:replace="layouts/layoutfragments :: javascriptimports"></div>
 </body>
-<!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-
-<!-- Optional theme -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-
-<!-- Latest compiled and minified JavaScript -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 </html>

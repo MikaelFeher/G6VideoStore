@@ -11,3 +11,7 @@ function editMovieDetails(productNumber) {
 function deleteMovie(productNumber) {
     window.location.assign(`/movies/movie/${productNumber}/delete`);
 }
+
+function showCustomerDetails(socialSecurityNumber) {
+    window.location.assign(`/customer/customer?socialSecurityNumber=${socialSecurityNumber}`);
+}

@@ -27,6 +27,7 @@ public class CustomerController {
         Customer customer = customerRepository.findBySocialSecurityNumber(socialSecurityNumber).get(0);
         model.addAttribute("rentedmovies", rentedMovieRepository.findByCustomer(customer));
         model.addAttribute("rentedmovieshistory", customer.getRentedMovies());
+        model.addAttribute("title", "Kund: " + customer.getFirstName() + " " + customer.getLastName());
         return "customer/customer";
     }
     
@@ -39,6 +40,7 @@ public class CustomerController {
             List<Customer> filteredCustomers = customerRepository.findBySocialSecurityNumberContainsIgnoreCaseAndFirstNameContainsIgnoreCaseAndLastNameContains(socialSecurityNumber, firstName, lastName);
             model.addAttribute("customers", filteredCustomers);
         }
+        model.addAttribute("title", "Alla kunder");
         return "customer/customers";
     }
 
@@ -56,15 +58,15 @@ public class CustomerController {
         return "redirect:/customer/customer?socialSecurityNumber=" + tempCustomer.getSocialSecurityNumber();
     }*/
 
-    @RequestMapping("/modifycustomer")
+    @PostMapping("/customer")
     public String modifyCustomer(Customer customer) {
         customerRepository.save(customer);
-        //updateCustomerTable(customer);
         return "redirect:/customer/customer?socialSecurityNumber=" + customer.getSocialSecurityNumber();
     }
     
     @RequestMapping("/addcustomer")
-    public String addCustomer() {
+    public String addCustomer(Model model) {
+        model.addAttribute("title", "Lägg till ny kund");
         return "customer/addcustomer";
     }
     
@@ -74,7 +76,7 @@ public class CustomerController {
         return "redirect:/customer/customers";
     }
 
-    @GetMapping("/searchcustomers")
+    @PostMapping("/customers")
     public String searchCustomer(Model model, @RequestParam(required = false) String socialSecurityNumber, @RequestParam(required = false) String firstName, @RequestParam(required = false) String lastName) {
         return "redirect:/customer/customers?socialSecurityNumber=" + socialSecurityNumber + "&firstName=" + firstName + "&lastName=" + lastName;
     }
