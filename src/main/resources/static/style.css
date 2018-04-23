@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 body{
     padding: 0px 9% 9%;
 }
@@ -10,7 +10,7 @@ body{
     margin-top: 45px;
 }
 
-=======
+
 tbody {
     display:block;
     height: 75vh;
@@ -38,4 +38,4 @@ tbody tr {
 textarea[name=description] {
     resize: none;
 }
->>>>>>> 2e79e85482a4a5c03aa2a3be7f27f16aec381ddb
+
