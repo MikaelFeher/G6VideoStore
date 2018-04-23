@@ -57,7 +57,7 @@ public class RentedMovie {
         this.customer = customer;
     }
 
-    @ManyToOne
+    @ManyToOne()
     public Movie getMovie() {
         return movie;
     }

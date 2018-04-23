@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en"
+      xmlns="http://www.w3.org/1999/xhtml">
+<head th:replace="layouts/layoutfragments :: head"></head>
+<body>
+
+<div th:replace="layouts/layoutfragments :: navbar"></div>
+
+<div class="container">
+    <div class="col-md-6 ml-auto mr-auto mt-5">
+        <h2>Lägg till ny film</h2>
+        <form th:action="@{/movies/addmovie}" th:object="${movie}" method="post" class="form-group">
+            <input type="text" class="form-control" name="name" id="name" placeholder="Titel..." th:required="required">
+            <textarea class="form-control mt-2" name="description" id="description" rows="5" placeholder="Handling..." th:required="required"></textarea>
+            <input type="text" class="form-control mt-2" name="category" id="category" placeholder="Kategori..." th:required="required">
+            <input type="text" class="form-control mt-2" name="releaseYear" id="release_year" placeholder="Utgivningsår..." th:required="required">
+            <input type="text" class="form-control mt-2" name="format" id="format" placeholder="Format..." th:value="Blu-Ray" th:required="required">
+            <a th:href="@{/movies}" class="btn btn-danger col-md-2 float-right mt-2 ml-2">Avbryt</a>
+            <button type="submit" class="btn btn-success col-md-2 mt-2 float-right">Spara</button>
+        </form>
+    </div>
+</div>
+
+<div th:replace="layouts/layoutfragments :: javascriptimports"></div>
+</body>
+</html>

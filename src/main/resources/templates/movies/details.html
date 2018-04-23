@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en"
+      xmlns="http://www.w3.org/1999/xhtml">
+<head th:replace="layouts/layoutfragments :: head"></head>
+<body>
+
+<div th:replace="layouts/layoutfragments :: navbar"></div>
+
+<div class="container">
+    <div class="col-md-6 ml-auto mr-auto mt-5">
+        <th:block th:object="${singleMovie}" >
+            <h1 th:text="*{name}"></h1>
+            <p th:text="'Utgivningsår: ' + *{releaseYear}">1984</p>
+            <p th:text="*{description}">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab
+                consectetur consequuntur debitis dolorum eaque harum, ipsum iusto maxime modi molestiae nesciunt
+                nostrum, nulla optio placeat quas, quidem rerum ut voluptatem.
+            </p>
+            <p th:text="'Artikelnummer: ' + *{productNumber}"></p>
+            <!-- IF MOVIE IS RENTED -->
+            <p th:if="*{rented}">Status: Uthyrd</p>
+            <!-- IF MOVIE IS NOT RENTED -->
+            <p th:unless="*{rented}">Status: Tillgänglig</p>
+            <button th:onclick="'editMovieDetails(\'' + *{productNumber}+ '\')'" class="btn btn-warning float-right ml-2">Redigera</button>
+        </th:block>
+        <a th:href="@{/movies}" class="btn btn-primary float-right">Tillbaka till filmer</a>
+    </div>
+</div>
+
+<div th:replace="layouts/layoutfragments :: javascriptimports"></div>
+</body>
+</html>
