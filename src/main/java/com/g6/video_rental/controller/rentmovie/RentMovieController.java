@@ -53,6 +53,10 @@ public class RentMovieController {
                 movieRepository.findByProductNumber(movie2),
                 movieRepository.findByProductNumber(movie3)
         );
+         /*
+         No reason to check if the movies to be rented are null/rented since the spec states that each movie has its
+         productNumber labelled on the physical box, can't rent a movie the store clerk isn't holding in his/her hands...
+         */
 
         Customer c = customerRepository.findBySocialSecurityNumber(socialSecurityNumber);
         if (c == null) {
@@ -62,7 +66,7 @@ public class RentMovieController {
 
         RentedMovie rm = new RentedMovie();
         rm.setCustomer(c);
-//        rm.setRentedDate(LocalDate.now().minusDays(2));
+        rm.setRentedDate(LocalDate.now().minusDays(2));
         rentedMovieRepository.save(rm);
 
         moviesToRent.stream().forEach(m -> {
@@ -76,9 +80,12 @@ public class RentMovieController {
 
     @GetMapping("/latemovies")
     public String getLateMovies(Model model) {
-        List<RentedMovie> lateMovies = rentedMovieRepository.findByRentedDateLessThan(LocalDate.now().minusDays(1));
+        List<RentedMovie> lateMovies = rentedMovieRepository.findByRentedDateLessThanAndReturnedDateNull(LocalDate.now().minusDays(1));
         model.addAttribute("lateMovies", lateMovies);
         model.addAttribute("title", "Försenade Inlämningar");
         return "rentmovies/latemovies";
     }
+
+    // Action for finding rented movies by socialsecnum and/or movie(name?)...
+    // Action for returning rented movies...
 }
