@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 body{
     padding: 0px 9% 9%;
 }
@@ -9,3 +10,32 @@ body{
     margin-top: 45px;
 }
 
+=======
+tbody {
+    display:block;
+    height: 75vh;
+    overflow-y:auto;
+    overflow-x: hidden;
+}
+thead, tbody tr {
+    display:table;
+    width:100%;
+    table-layout:fixed;
+}
+thead {
+    width: 100%;
+    /* The Calculation makes the header less wide than the body, matter of taste... */
+    /*width: calc( 100% - 1em )*/
+}
+table {
+    width:100%;
+}
+
+tbody tr {
+    cursor: pointer;
+}
+
+textarea[name=description] {
+    resize: none;
+}
+>>>>>>> 2e79e85482a4a5c03aa2a3be7f27f16aec381ddb
