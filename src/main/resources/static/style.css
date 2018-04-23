@@ -1,14 +1,15 @@
 
-body{
-    padding: 0px 9% 9%;
-}
+/*body{*/
+    /*padding: 0px 9% 9%;*/
+/*}*/
 
 .customButton{
-    width: 170px; !important;
+    width: 180px; !important;
 }
-.buttonGroupContainer{
-    margin-top: 45px;
-}
+
+/*.buttonGroupContainer{*/
+    /*margin-top: 45px;*/
+/*}*/
 
 
 tbody {

@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/dashboard")
 public class DashboardController {
 
-    @GetMapping("/")
+    @GetMapping("")
     public String getDashboard(){
         return "dashboard/dashboard";
     }
