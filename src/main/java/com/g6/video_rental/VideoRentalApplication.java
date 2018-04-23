@@ -11,6 +11,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
+import java.util.List;
+
 @SpringBootApplication
 public class VideoRentalApplication {
 
@@ -37,14 +39,14 @@ public class VideoRentalApplication {
             customerRepository.save(new Customer("970708-1234", "Ervin", "Jusfagic", "Rådhustorgrt 0", "12345", "Helsingborg", "Sverige", "0987654321" ,"ervinb@test.com"));
 
 
+            
+            // Customer renting a movie...
+            //RentedMovie rm = new RentedMovie(customerRepository.findBySocialSecurityNumber("770325-1234").get(0), movieRepository.findById(1L).get());
+            //rentedMovieRepository.save(rm);
+            //customer.getRentedMovies().add(rm);
 
-//            // Customer renting a movie...
-//            RentedMovie rm = new RentedMovie(customer, movie);
-//            rentedMovieRepository.save(rm);
-//            customer.getRentedMovies().add(rm);
-//
-//            System.out.println("Customer :" + customer.getRentedMovies());
-//            System.out.println("Customer 1: " + customer1.getRentedMovies());
+            //System.out.println("Customer :" + customer.getRentedMovies());
+            //System.out.println("Customer 1: " + customer1.getRentedMovies());
         };
     }
 }

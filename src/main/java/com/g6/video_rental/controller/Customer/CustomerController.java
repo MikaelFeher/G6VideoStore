@@ -20,8 +20,6 @@ public class CustomerController {
     private CustomerRepository customerRepository;
     @Autowired
     private RentedMovieRepository rentedMovieRepository;
-    @Autowired
-    private CustomerQueryRepository customerQueryRepository;
     
     @GetMapping("/customer")
     public String getCustomer(@RequestParam String socialSecurityNumber, Model model) {
@@ -60,12 +58,13 @@ public class CustomerController {
 
     @RequestMapping("/modifycustomer")
     public String modifyCustomer(Customer customer) {
-        updateCustomerTable(customer);
+        customerRepository.save(customer);
+        //updateCustomerTable(customer);
         return "redirect:/customer/customer?socialSecurityNumber=" + customer.getSocialSecurityNumber();
     }
     
     @RequestMapping("/addcustomer")
-    public String addCustomer(Model model) {
+    public String addCustomer() {
         return "customer/addcustomer";
     }
     
@@ -78,17 +77,5 @@ public class CustomerController {
     @GetMapping("/searchcustomers")
     public String searchCustomer(Model model, @RequestParam(required = false) String socialSecurityNumber, @RequestParam(required = false) String firstName, @RequestParam(required = false) String lastName) {
         return "redirect:/customer/customers?socialSecurityNumber=" + socialSecurityNumber + "&firstName=" + firstName + "&lastName=" + lastName;
-    }
-
-    private void updateCustomerTable(Customer customer) {
-        String socialSecurity = customer.getSocialSecurityNumber();
-        customerQueryRepository.updateFirstName(customer.getFirstName(), socialSecurity);
-        customerQueryRepository.updateLastName(customer.getLastName(), socialSecurity);
-        customerQueryRepository.updateAddress(customer.getAddress(), socialSecurity);
-        customerQueryRepository.updateZipCode(customer.getZipCode(), socialSecurity);
-        customerQueryRepository.updateCity(customer.getCity(), socialSecurity);
-        customerQueryRepository.updateCountry(customer.getCountry(), socialSecurity);
-        customerQueryRepository.updatePhoneNumber(customer.getPhoneNumber(), socialSecurity);
-        customerQueryRepository.updateEmail(customer.getEmail(), socialSecurity);
     }
 }
