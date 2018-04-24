@@ -23,11 +23,11 @@
                     <th:block th:each="movieName : ${lateMovie.getMovies()}">
 
                         <tr>
-                            <td th:text="${lateMovie.getId()}"></td>
-                            <td th:text="${movieName.getName()}"></td>
                             <td th:text="${lateMovie.getCustomer().getSocialSecurityNumber()}"></td>
-                            <td th:text="${lateMovie.getRentedDate()}"></td>
-                            <td th:text="${lateMovie.getReturnedDate()}"></td>
+                            <td th:text="${lateMovie.getCustomer().getFirstName, lateMovies.getLastName}"></td>
+                            <td th:text="${lateMovie.getCustomer().getPhoneNumber()}"></td>
+                            <td th:text="${lateMovie.getMovie()}"></td>
+
                         </tr>
                     </th:block>
                 </th:block>
