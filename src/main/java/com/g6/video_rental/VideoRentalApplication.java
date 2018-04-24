@@ -11,6 +11,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
+import java.time.LocalDate;
+import java.util.Arrays;
 import java.util.List;
 
 @SpringBootApplication
@@ -36,21 +38,48 @@ public class VideoRentalApplication {
             // Adding customers to the db...
             Customer c = new Customer("770325-1234", "Mikael", "Feher", "Stadsparken 0", "12345", "Skurup", "Sverige", "0987654321" ,"mikael@test.com");
             customerRepository.save(c);
-//            customerRepository.save(new Customer("770325-1234", "Mikael", "Feher", "Stadsparken 0", "12345", "Skurup", "Sverige", "0987654321" ,"mikael@test.com"));
-            customerRepository.save(new Customer("820916-1234", "Max", "Barnell", "Drottninggatan 0", "12345", "Helsingborg", "Sverige", "0987654321" ,"maxb@test.com"));
+
+            Customer c1 = new Customer("820916-1234", "Max", "Barnell", "Drottninggatan 0", "12345", "Helsingborg", "Sverige", "0987654321" ,"maxb@test.com");
+            customerRepository.save(c1);
+
             customerRepository.save(new Customer("970708-1234", "Ervin", "Jusfagic", "Rådhustorgrt 0", "12345", "Helsingborg", "Sverige", "0987654321" ,"ervinb@test.com"));
 
+            // Customer renting movies...
+            RentedMovie rm1 = new RentedMovie();
+            rm1.setCustomer(c1);
+            rentedMovieRepository.save(rm1);
 
+            List<Movie> rentals1 = Arrays.asList(
+                    movieRepository.findByProductNumber(6L),
+                    movieRepository.findByProductNumber(7L),
+                    movieRepository.findByProductNumber(8L)
+            );
+            rentals1.stream().forEach(m -> {
+                if (!m.isRented()){
+                    m.setRentedMovie(rm1);
+                    m.setRented(true);
+                }
+            });
+            movieRepository.saveAll(rentals1);
 
+            // Customer renting movies WITH LATE return...
+            RentedMovie rm = new RentedMovie();
+            rm.setCustomer(c);
+            rm.setRentedDate(LocalDate.now().minusDays(3));
+            rentedMovieRepository.save(rm);
 
-            // Customer renting a movie...
-//            RentedMovie rm = new RentedMovie();
-//            rm.setCustomer(c);
-//            rentedMovieRepository.save(rm);
-//
-//            List<Movie> rentals = (List<Movie>) movieRepository.findAll();
-//            rentals.stream().forEach(m -> m.setRentedMovie(rm));
-//            movieRepository.saveAll(rentals);
+            List<Movie> rentals = Arrays.asList(
+                    movieRepository.findByProductNumber(1L),
+                    movieRepository.findByProductNumber(4L),
+                    movieRepository.findByProductNumber(5L)
+            );
+            rentals.stream().forEach(m -> {
+                if (!m.isRented()){
+                    m.setRentedMovie(rm);
+                    m.setRented(true);
+                }
+            });
+            movieRepository.saveAll(rentals);
         };
     }
 }

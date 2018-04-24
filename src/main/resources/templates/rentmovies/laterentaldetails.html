@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en"
+      xmlns="http://www.w3.org/1999/xhtml">
+<head th:replace="layouts/layoutfragments :: head"></head>
+<body>
+
+<div th:replace="layouts/layoutfragments :: navbar"></div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-5 mt-5 alert alert-warning">
+            <div th:replace="layouts/layoutfragments :: customerInfo"></div>
+        </div>
+        <div class="col-md-6 offset-md-1 mt-5 alert alert-danger">
+            <div th:replace="layouts/layoutfragments :: movieInfo"></div>
+        </div>
+    </div>
+</div>
+
+<div th:replace="layouts/layoutfragments :: javascriptimports"></div>
+</body>
+</html>

@@ -1,4 +1,4 @@
-tbody {
+.customTable tbody {
     display:block;
     height: 75vh;
     overflow-y:auto;
@@ -9,16 +9,16 @@ thead, tbody tr {
     width:100%;
     table-layout:fixed;
 }
-thead {
+.customTable thead {
     width: 100%;
     /* The Calculation makes the header less wide than the body, matter of taste... */
     /*width: calc( 100% - 1em )*/
 }
-table {
+.customTable table {
     width:100%;
 }
 
-tbody tr {
+.customTable tbody tr {
     cursor: pointer;
 }
 

@@ -7,7 +7,6 @@
 <div class="container">
     <div class="col-md-6 ml-auto mr-auto mt-5">
         <h2>Ny Uthyrning</h2>
-
         <form th:action="@{/rentedmovies/rentmovie}" class="form-group" method="post">
             <input type="text" class="form-control" name="socialSecurityNumber" placeholder="Personnummer...">
             <div th:if="${errorMessage}">

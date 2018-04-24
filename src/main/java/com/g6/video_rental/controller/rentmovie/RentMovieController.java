@@ -12,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -35,8 +36,23 @@ public class RentMovieController {
         return "rentmovies/rentedmovies";
     }
 
+    @GetMapping("/{rentalId}/rentaldetails")
+    public String getRentalDetails(Model model, @PathVariable Long rentalId) {
+        RentedMovie rental = rentedMovieRepository.findById(rentalId).get();
+        Customer customer = customerRepository.findBySocialSecurityNumber(rental.getCustomer().getSocialSecurityNumber());
+        List<Movie> rentedMovies = new ArrayList<>();
+        rental.getMovies().stream().forEach(m -> rentedMovies.add(m));
+
+        model.addAttribute("customer", customer);
+        model.addAttribute("rental", rental);
+        model.addAttribute("movies", rentedMovies);
+        model.addAttribute("tableTitle", "Hyrda Filmer");
+        model.addAttribute("title", "Uthyrningsinformation");
+        return "rentmovies/rentaldetails";
+    }
+
     @GetMapping("/rentmovie")
-    public String rentMoviesPage(Model model){
+    public String rentMoviesPage(Model model) {
         model.addAttribute("title", "Ny Uthyrning");
         return "rentmovies/rentmovie";
     }
@@ -66,7 +82,6 @@ public class RentMovieController {
 
         RentedMovie rm = new RentedMovie();
         rm.setCustomer(c);
-        rm.setRentedDate(LocalDate.now().minusDays(2));
         rentedMovieRepository.save(rm);
 
         moviesToRent.stream().forEach(m -> {
@@ -84,6 +99,23 @@ public class RentMovieController {
         model.addAttribute("lateMovies", lateMovies);
         model.addAttribute("title", "Försenade Inlämningar");
         return "rentmovies/latemovies";
+    }
+
+    @GetMapping("/latemovies/{rentalId}/laterentaldetails")
+    public String getLateRentalDetails(Model model, @PathVariable Long rentalId) {
+        RentedMovie lateRental = rentedMovieRepository.findById(rentalId).get();
+        Customer customer = customerRepository.findBySocialSecurityNumber(lateRental.getCustomer().getSocialSecurityNumber());
+        List<Movie> lateMovies = new ArrayList<>();
+
+        lateRental.getMovies().stream().forEach(m -> lateMovies.add(m));
+
+        model.addAttribute("customer", customer);
+        model.addAttribute("rental", lateRental);
+        model.addAttribute("movies", lateMovies);
+        model.addAttribute("tableTitle", "Försenade Filmer");
+        model.addAttribute("title", "Förseningsinformation");
+
+        return "rentmovies/laterentaldetails";
     }
 
     // Action for finding rented movies by socialsecnum and/or movie(name?)...
