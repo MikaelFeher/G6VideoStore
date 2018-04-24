@@ -1,51 +1,53 @@
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml"
-                xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
+      xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layouts/layoutfragments :: head"></head>
 <body>
-<form method="post" th:object="${customer}" th:action="@{/customer/addcustomer}">
-    <!--<th:block th:each="customer : ${customer}">-->
-        <label>
-            Personnummer:<br>
-            <input type="text" name="socialSecurityNumber" placeholder="YYMMDD-XXXX"><br>
-        </label>
-        <label>
-            Förnamn:<br>
-            <input type="text" name="firstName" placeholder="Förnamn"><br>
-        </label>
-        <label>
-            Efternamn:<br>
-            <input type="text" name="lastName" placeholder="Efternamn"><br>
-        </label>
-        <label>
-            Adress:<br>
-            <input type="text" name="address" placeholder="Adress"><br>
-        </label>
-        <label>
-            Postnummer:<br>
-            <input type="text" name="zipCode" placeholder="XXXXX"><br>
-        </label>
-        <label>
-            Stad:<br>
-            <input type="text" name="city" placeholder="Stad"><br>
-        </label>
-        <label>
-            Land:<br>
-            <input type="text" name="country" th:value="Sverige"><br>
-        </label>
-        <label>
-            Telefonnummer:<br>
-            <input type="text" name="phoneNumber" placeholder="0701232323"><br>
-        </label>
-        <label>
-            E-mail:<br>
-            <input type="email" name="email"><br>
-        </label>
-        <button th:type="submit" name="action" value="change">Spara</button>
-    <!--</th:block>-->
-</form>
+<div th:replace="layouts/layoutfragments :: navbar"></div>
+
+<div class="container">
+    <div class="col-md-12 ml-auto mr-auto mt-5">
+        <form method="post" th:object="${customer}" th:action="@{/customer/addcustomer}">
+            <div class="form-group row">
+                <div class="col-md-4">
+                    <input type="text" name="socialSecurityNumber" placeholder="Personnummer (YYMMDD-XXXX)"
+                           class="form-control form-control-lg">
+                </div>
+                <div class="col-md-4">
+                    <input type="text" name="firstName" placeholder="Förnamn" class="form-control form-control-lg">
+                </div>
+                <div class="col-md-4">
+                    <input type="text" name="lastName" placeholder="Efternamn" class="form-control form-control-lg">
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-md-3">
+                    <input type="text" name="address" placeholder="Adress" class="form-control form-control-lg"><br>
+                </div>
+                <div class="col-md-3">
+                    <input type="text" name="zipCode" placeholder="Postnummer" class="form-control form-control-lg"><br>
+                </div>
+                <div class="col-md-3">
+                    <input type="text" name="city" placeholder="Stad" class="form-control form-control-lg"><br>
+                </div>
+                <div class="col-md-3">
+                    <input type="text" name="country" th:value="Sverige" class="form-control form-control-lg"><br>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-md-3">
+                    <input type="text" name="phoneNumber" placeholder="Telefonnummer" class="form-control form-control-lg"><br>
+                </div>
+                <div class="col-md-7">
+                    <input type="email" name="email" placeholder="E-mail" class="form-control form-control-lg"><br>
+                </div>
+                <div class="col-md-2 mt-4.5">
+                    <button th:type="submit" name="action" value="change" class="btn-lg btn-success form-control">Spara</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<div th:replace="layouts/layoutfragments :: javascriptimports"></div>
 </body>
 </html>
