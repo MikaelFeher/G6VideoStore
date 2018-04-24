@@ -10,8 +10,8 @@
     <div th:object="${customer}" class="col-md-6 mt-5 mx-auto alert alert-success">
         <p>Alla filmer har återlämnats för kund: </p>
         <table class="table">
-            <thead>
-            <tr>
+            <thead class="border-0">
+            <tr class="border-0">
                 <th scope="col">Personnummer</th>
                 <th scope="col">Namn</th>
             </tr>
@@ -23,6 +23,7 @@
                 </tr>
             </tbody>
         </table>
+        <a href="#" th:href="@{/rentedmovies}" class="btn btn-primary">Tillbaka till uthyrningar</a>
     </div>
 </div>
 </div>

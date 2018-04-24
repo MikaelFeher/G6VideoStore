@@ -13,7 +13,6 @@
             <th scope="col">Titel</th>
             <th scope="col">Personnummer</th>
             <th scope="col">Uthyrningsdatum</th>
-            <th scope="col">Inlämningsdatum</th>
         </tr>
         </thead>
         <tbody>
@@ -24,7 +23,6 @@
                     <td th:text="${movieName.getName()}"></td>
                     <td th:text="${lateMovie.getCustomer().getSocialSecurityNumber()}"></td>
                     <td th:text="${lateMovie.getRentedDate()}"></td>
-                    <td th:text="${lateMovie.getReturnedDate()}"></td>
                 </tr>
             </th:block>
         </th:block>
