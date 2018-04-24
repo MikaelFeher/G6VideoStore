@@ -64,27 +64,38 @@ public class RentMovieController {
                             @RequestParam (required = false) Long movie3,
                             Model model) {
         List<Movie> moviesToRent = new ArrayList<>();
+        List<Movie> alreadyRented = new ArrayList<>();
 
-        if (movie1 == null) {
-            // something
-        }else {
-            moviesToRent.add(movieRepository.findByProductNumber(movie1));
-        }
-        if (movie2 == null) {
-            // something
-        }else {
-            moviesToRent.add(movieRepository.findByProductNumber(movie2));
-        }
-        if (movie3 == null) {
-            // something
-        } else {
-            moviesToRent.add(movieRepository.findByProductNumber(movie3));
-        }
+        checkMovieRentability(movie1, moviesToRent, alreadyRented);
+        checkMovieRentability(movie2, moviesToRent, alreadyRented);
+        checkMovieRentability(movie3, moviesToRent, alreadyRented);
+
+//        if (movie1 == null) {
+//            // something
+//        }else {
+//            moviesToRent.add(movieRepository.findByProductNumber(movie1));
+//        }
+//        if (movie2 == null) {
+//            // something
+//        }else {
+//            moviesToRent.add(movieRepository.findByProductNumber(movie2));
+//        }
+//        if (movie3 == null) {
+//            // something
+//        } else {
+//            moviesToRent.add(movieRepository.findByProductNumber(movie3));
+//        }
 
         Customer c = customerRepository.findBySocialSecurityNumber(socialSecurityNumber);
         if (c == null) {
             model.addAttribute("errorMessage", "Kunden finns ej i systemet");
             model.addAttribute("title", "Kunden finns ej");
+            return "rentmovies/rentmovie";
+        }
+
+        if (alreadyRented.size() > 0) {
+            model.addAttribute("alreadyRented", alreadyRented);
+            model.addAttribute("title", "Fel vid uthyrning");
             return "rentmovies/rentmovie";
         }
 
@@ -105,6 +116,19 @@ public class RentMovieController {
         movieRepository.saveAll(moviesToRent);
 
         return "redirect:/rentedmovies";
+    }
+
+    private void checkMovieRentability(@RequestParam(required = false) Long movie2, List<Movie> moviesToRent, List<Movie> alreadyRented) {
+        if (movie2 == null) {
+            // Do nothing...
+        }else {
+            Movie m2 = movieRepository.findByProductNumber(movie2);
+            if (m2.isRented()){
+                alreadyRented.add(m2);
+            } else {
+                moviesToRent.add(m2);
+            }
+        }
     }
 
     @GetMapping("/latemovies")
