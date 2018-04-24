@@ -19,62 +19,19 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <th scope="row">1</th>
-                    <td>Mark Otto</td>
-                    <td>0760000000</td>
-                    <td>Star Wars - A new hope</td>
-                </tr>
-                <tr>
-                    <th scope="row">1</th>
-                    <td>Mark Otto</td>
-                    <td>0760000000</td>
-                    <td>Star Wars - A new hope</td>
-                </tr>
-                <tr>
-                    <th scope="row">1</th>
-                    <td>Mark Otto</td>
-                    <td>0760000000</td>
-                    <td>Star Wars - A new hope</td>
-                </tr>
-                <tr>
-                    <th scope="row">1</th>
-                    <td>Mark Otto</td>
-                    <td>0760000000</td>
-                    <td>Star Wars - A new hope</td>
-                </tr>
-                <tr>
-                    <th scope="row">1</th>
-                    <td>Mark Otto</td>
-                    <td>0760000000</td>
-                    <td>Star Wars - A new hope</td>
-                </tr>
-                <tr>
-                    <th scope="row">1</th>
-                    <td>Mark Otto</td>
-                    <td>0760000000</td>
-                    <td>Star Wars - A new hope</td>
-                </tr>
-                <tr>
-                    <th scope="row">1</th>
-                    <td>Mark Otto</td>
-                    <td>0760000000</td>
-                    <td>Star Wars - A new hope</td>
-                </tr>
+                <th:block th:each="lateMovie : ${lateMovies}">
+                    <th:block th:each="movieName : ${lateMovie.getMovies()}">
 
-                <tr>
-                    <th scope="row">2</th>
-                    <td>Jacob Thornton</td>
-                    <td>0760000000</td>
-                    <td>Star Wars - The empire strikes back</td>
-                </tr>
+                        <tr>
+                            <td th:text="${lateMovie.getId()}"></td>
+                            <td th:text="${movieName.getName()}"></td>
+                            <td th:text="${lateMovie.getCustomer().getSocialSecurityNumber()}"></td>
+                            <td th:text="${lateMovie.getRentedDate()}"></td>
+                            <td th:text="${lateMovie.getReturnedDate()}"></td>
+                        </tr>
+                    </th:block>
+                </th:block>
 
-                <tr>
-                    <th scope="row">3</th>
-                    <td>Larry the Bird</td>
-                    <td>0760000000</td>
-                    <td>Star Wars - The empire strikes back, Star Wars - The empire strikes back</td>
-                </tr>
                 </tbody>
             </table>
         </div>
