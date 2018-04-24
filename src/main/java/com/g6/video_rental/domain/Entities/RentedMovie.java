@@ -50,7 +50,7 @@ public class RentedMovie {
         this.id = id;
     }
 
-    @OneToOne
+    @ManyToOne
     public Customer getCustomer() {
         return customer;
     }

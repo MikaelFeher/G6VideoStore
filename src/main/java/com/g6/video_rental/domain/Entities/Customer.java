@@ -15,7 +15,7 @@ public class Customer {
     private String country = "Sverige";
     private String phoneNumber;
     private String email;
-    private RentedMovie rentedMovies;
+    private List<RentedMovie> rentedMovies;
 
     public Customer() {
     }
@@ -105,12 +105,12 @@ public class Customer {
         this.email = email;
     }
 
-    @OneToOne(mappedBy = "customer")
-    public RentedMovie getRentedMovies() {
+    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
+    public List<RentedMovie> getRentedMovies() {
         return rentedMovies;
     }
 
-    public void setRentedMovies(RentedMovie rentedMovies) {
+    public void setRentedMovies(List<RentedMovie> rentedMovies) {
         this.rentedMovies = rentedMovies;
     }
 

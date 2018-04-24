@@ -59,19 +59,25 @@ public class RentMovieController {
 
     @PostMapping("/rentmovie")
     public String rentMovie(@RequestParam String socialSecurityNumber,
-                            @RequestParam Long movie1,
-                            @RequestParam Long movie2,
-                            @RequestParam Long movie3,
+                            @RequestParam (required = false) Long movie1,
+                            @RequestParam (required = false) Long movie2,
+                            @RequestParam (required = false) Long movie3,
                             Model model) {
         List<Movie> moviesToRent = new ArrayList<>();
 
-        if (movie1 != null) {
+        if (movie1 == null) {
+            // something
+        }else {
             moviesToRent.add(movieRepository.findByProductNumber(movie1));
         }
-        if (movie2 != null) {
+        if (movie2 == null) {
+            // something
+        }else {
             moviesToRent.add(movieRepository.findByProductNumber(movie2));
         }
-        if (movie3 != null) {
+        if (movie3 == null) {
+            // something
+        } else {
             moviesToRent.add(movieRepository.findByProductNumber(movie3));
         }
 
@@ -82,7 +88,7 @@ public class RentMovieController {
             return "rentmovies/rentmovie";
         }
 
-        if(rentedMovieRepository.findByCustomer_SocialSecurityNumber(c.getSocialSecurityNumber()) != null){
+        if(rentedMovieRepository.findByCustomer_SocialSecurityNumberAndReturnedDateIsNull(c.getSocialSecurityNumber()) != null){//
             model.addAttribute("errorMessage", "Kunden har redan en uthyrning");
             model.addAttribute("title", "Kunden har redan en uthyrning");
             return "rentmovies/rentmovie";
@@ -129,18 +135,28 @@ public class RentMovieController {
     @PostMapping("/returnmovies")
     public String returnMovies(Model model, @RequestParam Long rentalId) {
         RentedMovie rental = rentedMovieRepository.findById(rentalId).get();
+        Customer c = customerRepository.findBySocialSecurityNumber(rental.getCustomer().getSocialSecurityNumber());
         List<Movie> returnedMovies = new ArrayList<>();
 
         rental.getMovies().stream().forEach(movie -> {
             movie.setRented(false);
+            movie.setRentedMovie(null);
             returnedMovies.add(movie);
         });
         movieRepository.saveAll(returnedMovies);
 
+        returnedMovies.clear();
         rental.setReturnedDate(LocalDate.now());
+        rental.setMovies(returnedMovies);
         rentedMovieRepository.save(rental);
 
-        model.addAttribute("returnedMovies", returnedMovies);
+//        List<RentedMovie> tmp = c.getRentedMovies();
+//        tmp.clear();
+        c.getRentedMovies().clear();
+        customerRepository.save(c);
+        c.getRentedMovies().stream().forEach(System.out::println);
+
+        model.addAttribute("customer", c);
 
         return "rentmovies/returnmovies";
     }

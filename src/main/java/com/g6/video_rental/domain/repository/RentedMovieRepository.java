@@ -9,5 +9,6 @@ import java.util.List;
 public interface RentedMovieRepository extends CrudRepository<RentedMovie, Long> {
     List<RentedMovie> findByRentedDateLessThanAndReturnedDateNull(LocalDate localDate);
     List<RentedMovie> findByCustomer_SocialSecurityNumber(String socialSecurityNumber);
+    RentedMovie findByCustomer_SocialSecurityNumberAndReturnedDateIsNull(String socialSecurityNumber);
 
 }

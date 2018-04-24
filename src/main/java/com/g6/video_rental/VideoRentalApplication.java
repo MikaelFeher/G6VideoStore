@@ -62,6 +62,10 @@ public class VideoRentalApplication {
             });
             movieRepository.saveAll(rentals1);
 
+            List<RentedMovie> rml = Arrays.asList(rentedMovieRepository.findById(rm1.getId()).get());
+            c1.setRentedMovies(rml);
+            customerRepository.save(c1);
+
             // Customer renting movies WITH LATE return...
             RentedMovie rm = new RentedMovie();
             rm.setCustomer(c);
@@ -80,6 +84,10 @@ public class VideoRentalApplication {
                 }
             });
             movieRepository.saveAll(rentals);
+
+            List<RentedMovie> rml1 = Arrays.asList(rentedMovieRepository.findById(rm1.getId()).get());
+            c.setRentedMovies(rml1);
+            customerRepository.save(c);
         };
     }
 }
