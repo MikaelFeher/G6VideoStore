@@ -126,6 +126,25 @@ public class RentMovieController {
         return "rentmovies/laterentaldetails";
     }
 
+    @PostMapping("/returnmovies")
+    public String returnMovies(Model model, @RequestParam Long rentalId) {
+        RentedMovie rental = rentedMovieRepository.findById(rentalId).get();
+        List<Movie> returnedMovies = new ArrayList<>();
+
+        rental.getMovies().stream().forEach(movie -> {
+            movie.setRented(false);
+            returnedMovies.add(movie);
+        });
+        movieRepository.saveAll(returnedMovies);
+
+        rental.setReturnedDate(LocalDate.now());
+        rentedMovieRepository.save(rental);
+
+        model.addAttribute("returnedMovies", returnedMovies);
+
+        return "rentmovies/returnmovies";
+    }
+
     // Action for finding rented movies by socialsecnum and/or movie(name?)...
     // Action for returning rented movies...
 }
