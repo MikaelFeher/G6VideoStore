@@ -10,7 +10,7 @@
         <form th:action="@{/rentedmovies/rentmovie}" class="form-group" method="post">
             <input type="text" class="form-control" name="socialSecurityNumber" placeholder="Personnummer...">
             <div th:if="${errorMessage}">
-                <p th:text="${errorMessage}" class="alert alert-danger"></p>
+                <p th:text="${errorMessage}" class="alert alert-danger mt-1"></p>
             </div>
             <input type="text" class="form-control mt-2" name="movie1" placeholder="Artikelnummer...">
             <input type="text" class="form-control mt-2" name="movie2" placeholder="Artikelnummer...">

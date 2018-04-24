@@ -94,7 +94,7 @@
         </table>
         <form th:if="${rental.getReturnedDate() == null}" th:action="@{/rentedmovies/returnmovies}" method="post">
             <input type="hidden" name="rentalId" th:value="${rental.getId()}">
-            <button type="submit">Lämna in</button>
+            <button type="submit" class="btn btn-success">Återlämning</button>
         </form>
     </th:block>
 </div>
