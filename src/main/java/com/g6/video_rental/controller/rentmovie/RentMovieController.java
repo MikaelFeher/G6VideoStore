@@ -63,20 +63,28 @@ public class RentMovieController {
                             @RequestParam Long movie2,
                             @RequestParam Long movie3,
                             Model model) {
+        List<Movie> moviesToRent = new ArrayList<>();
 
-        List<Movie> moviesToRent = Arrays.asList(
-                movieRepository.findByProductNumber(movie1),
-                movieRepository.findByProductNumber(movie2),
-                movieRepository.findByProductNumber(movie3)
-        );
-         /*
-         No reason to check if the movies to be rented are null/rented since the spec states that each movie has its
-         productNumber labelled on the physical box, can't rent a movie the store clerk isn't holding in his/her hands...
-         */
+        if (movie1 != null) {
+            moviesToRent.add(movieRepository.findByProductNumber(movie1));
+        }
+        if (movie2 != null) {
+            moviesToRent.add(movieRepository.findByProductNumber(movie2));
+        }
+        if (movie3 != null) {
+            moviesToRent.add(movieRepository.findByProductNumber(movie3));
+        }
 
         Customer c = customerRepository.findBySocialSecurityNumber(socialSecurityNumber);
         if (c == null) {
             model.addAttribute("errorMessage", "Kunden finns ej i systemet");
+            model.addAttribute("title", "Kunden finns ej");
+            return "rentmovies/rentmovie";
+        }
+
+        if(rentedMovieRepository.findByCustomer_SocialSecurityNumber(c.getSocialSecurityNumber()) != null){
+            model.addAttribute("errorMessage", "Kunden har redan en uthyrning");
+            model.addAttribute("title", "Kunden har redan en uthyrning");
             return "rentmovies/rentmovie";
         }
 
