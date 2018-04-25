@@ -10,5 +10,6 @@ public interface RentedMovieRepository extends CrudRepository<RentedMovie, Long>
     List<RentedMovie> findByRentedDateLessThanAndReturnedDateNull(LocalDate localDate);
     List<RentedMovie> findByCustomer_SocialSecurityNumber(String socialSecurityNumber);
     RentedMovie findByCustomer_SocialSecurityNumberAndReturnedDateIsNull(String socialSecurityNumber);
+    List<RentedMovie> findByCustomer_SocialSecurityNumberAndReturnedDateIsNotNull(String socialSecurityNumber);
 
 }

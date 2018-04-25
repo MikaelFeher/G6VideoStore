@@ -1,6 +1,8 @@
 package com.g6.video_rental.controller.Customer;
 
 import com.g6.video_rental.domain.Entities.Customer;
+import com.g6.video_rental.domain.Entities.Movie;
+import com.g6.video_rental.domain.Entities.RentedMovie;
 import com.g6.video_rental.domain.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -10,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -23,12 +26,14 @@ public class CustomerController {
     
     @GetMapping("/customer")
     public String getCustomer(@RequestParam String socialSecurityNumber, Model model) {
-        model.addAttribute("customer", customerRepository.findBySocialSecurityNumber(socialSecurityNumber));
-        Customer customer = customerRepository.findBySocialSecurityNumber(socialSecurityNumber).get(0);
-        model.addAttribute("rentedmovies", rentedMovieRepository.findByCustomer(customer));
+        Customer customer = customerRepository.findBySocialSecurityNumber(socialSecurityNumber);
+
+        model.addAttribute("customer", customer);
+        model.addAttribute("rentedmovies", rentedMovieRepository.findByCustomer_SocialSecurityNumberAndReturnedDateIsNull(customer.getSocialSecurityNumber()));
         model.addAttribute("rentedmovieshistory", customer.getRentedMovies());
         model.addAttribute("title", "Kund: " + customer.getFirstName() + " " + customer.getLastName());
         return "customer/customer";
+
     }
     
     @GetMapping("/customers")

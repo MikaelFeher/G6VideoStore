@@ -119,6 +119,7 @@ public class Movie {
 //        }
 //    }
 
+
     @Override
     public String toString() {
         return "Movie{" +
@@ -129,6 +130,7 @@ public class Movie {
                 ", category='" + category + '\'' +
                 ", format='" + format + '\'' +
                 ", rented=" + rented +
+                ", rentedMovie=" + rentedMovie +
                 '}';
     }
 }
