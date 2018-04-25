@@ -16,7 +16,6 @@
                 <button class="btn btn-success mt-2 ml-2 col-md-1" value="Submit">Sök</button>
                 <a th:href="@{'/customer/addcustomer'}" class="btn btn-outline-info mt-2 ml-1" value="Submit">Lägg till
                     ny kund</a>
-                <!--<a th:href="@{/customer/addmovie}" class="btn btn-outline-info btn-block mt-2">Lägg till ny film</a>-->
             </div>
         </form>
     </div>
@@ -28,12 +27,6 @@
                 <th scope="col">Personnummer</th>
                 <th scope="col">Förnamn</th>
                 <th scope="col">Efternamn</th>
-                <!--<th scope="col">Adress</th>
-                <th style="width:  6%">Postnr</th>
-                <th scope="col">Stad</th>
-                <th style="width:  6%">Land</th>
-                <th scope="col">Telefon</th>
-                <th scope="col">E-mail</th>-->
             </tr>
             </thead>
             <th:block th:each="customer : ${customers}">
@@ -41,12 +34,6 @@
                     <td scope="col" th:text="${customer.socialSecurityNumber}"></td>
                     <td scope="col" th:text="${customer.firstName}"></td>
                     <td scope="col" th:text="${customer.lastName}"></td>
-                    <!--<td scope="col" th:text="${customer.address}"></td>
-                    <td style="width:  6%" th:text="${customer.zipCode}"></td>
-                    <td scope="col" th:text="${customer.city}"></td>
-                    <td style="width:  6%" th:text="${customer.country}"></td>
-                    <td scope="col" th:text="${customer.phoneNumber}"></td>
-                    <td scope="col" th:text="${customer.email}"></td>-->
                 </tr>
             </th:block>
         </table>

@@ -8,8 +8,6 @@
 <div class="container">
     <div class="col-md-12 ml-auto mr-auto mt-5">
         <form method="post" th:object="${customer}" th:action="@{/customer/customer}">
-            <!--class="form-group col-md-4 ml-auto mr-auto"-->
-            <!--<div class="row mt-3 ml-auto mr-auto col-md-12">-->
             <th:block th:each="customer : ${customer}">
                 <div class="form-group row">
                     <div class="col-md-4">
@@ -82,20 +80,6 @@
                 <td scope="col"></td>
             </tr>
         </th:block>
-        <!--<tr>
-            <td scope="col"></td>
-            <td scope="col"></td>
-            <td scope="col"></td>
-            <td scope="col"></td>
-            <td scope="col">
-                <form th:action="@{/customer/returnmovies}" th:object="${customer}" method="get">
-                    <th:block th:each="customer : ${customer}">
-                    <input type="hidden" name="socialSecurityNumber" th:value="${customer.socialSecurityNumber}" />
-                    <button type="submit">Lämna in</button>
-                    </th:block>
-                </form>
-            </td>
-        </tr>-->
     </table>
 </div>
 

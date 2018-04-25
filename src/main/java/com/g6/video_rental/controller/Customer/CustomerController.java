@@ -44,20 +44,6 @@ public class CustomerController {
         return "customer/customers";
     }
 
-    /*@RequestMapping("/returnmovies")
-    public String getReturnMovies(@RequestParam String socialSecurityNumber, Model model) {
-        List<RentedMovie> rentedMovie;
-        Customer tempCustomer = customerRepository.findBySocialSecurityNumber(socialSecurityNumber).get(0);
-        rentedMovie = rentedMovieRepository.findByCustomer(tempCustomer);
-        tempCustomer.setRentedMovies(rentedMovie);
-        for(RentedMovie rented : rentedMovie) {
-            //rentedMovieQueryRepository.deleteRentedMovie(rented.getId());
-            rented.setCustomer(null);
-            rentedMovieRepository.save(rented);
-        }
-        return "redirect:/customer/customer?socialSecurityNumber=" + tempCustomer.getSocialSecurityNumber();
-    }*/
-
     @PostMapping("/customer")
     public String modifyCustomer(Customer customer) {
         customerRepository.save(customer);
