@@ -25,6 +25,15 @@
                     <a class="dropdown-item bg-dark text-light" href="#" th:href="@{/movies/addmovie}">Lägg till ny film</a>
                 </div>
             </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle text-light" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Kunder
+                </a>
+                <div class="dropdown-menu bg-dark" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item bg-dark text-light" href="#" th:href="@{/customer/customers}">Alla Kunder</a>
+                    <a class="dropdown-item bg-dark text-light" href="#" th:href="@{/customer/addcustomer}">Lägg till ny kund</a>
+                </div>
+            </li>
         </ul>
     </div>
 </nav>
@@ -35,6 +44,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
     <script th:src="@{/movies.js}"></script>
+    <script th:src="@{/customer.js}"></script>
 </div>
 </body>
 </html>

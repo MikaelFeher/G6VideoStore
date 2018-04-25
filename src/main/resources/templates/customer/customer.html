@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layouts/layoutfragments :: head"></head>
+<body>
+<div th:replace="layouts/layoutfragments :: navbar"></div>
+
+<div class="container">
+    <div class="col-md-12 ml-auto mr-auto mt-5">
+        <form method="post" th:object="${customer}" th:action="@{/customer/customer}">
+            <th:block th:each="customer : ${customer}">
+                <div class="form-group row">
+                    <div class="col-md-4">
+                        <input type="text" name="socialSecurityNumber" th:value="${customer.socialSecurityNumber}"
+                               class="form-control form-control-lg">
+                    </div>
+                    <div class="col-md-4">
+                        <input type="text" name="firstName" th:value="${customer.firstName}"
+                               class="form-control form-control-lg">
+                    </div>
+                    <div class="col-md-4">
+                        <input type="text" name="lastName" th:value="${customer.lastName}"
+                               class="form-control form-control-lg">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-3">
+                        <input type="text" name="address" th:value="${customer.address}"
+                               class="form-control form-control-lg">
+                    </div>
+                    <div class="col-md-3">
+                        <input type="text" name="zipCode" th:value="${customer.zipCode}"
+                               class="form-control form-control-lg">
+                    </div>
+                    <div class="col-md-3">
+                        <input type="text" name="city" th:value="${customer.city}" class="form-control form-control-lg">
+                    </div>
+                    <div class="col-md-3">
+                        <input type="text" name="country" th:value="${customer.country}"
+                               class="form-control form-control-lg">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-3">
+                        <input type="text" name="phoneNumber" th:value="${customer.phoneNumber}"
+                               class="form-control form-control-lg">
+                    </div>
+                    <div class="col-md-7">
+                        <input type="email" name="email" th:value="${customer.email}"
+                               class="form-control form-control-lg">
+                    </div>
+                    <div class="col-md-2">
+                        <button th:type="submit" name="action" value="change"
+                                class="btn-lg btn-success form-control">Spara
+                        </button>
+                    </div>
+                </div>
+    </div>
+    </th:block>
+
+    </form>
+</div>
+<div class="container">
+    <h2>Hyrda Filmer</h2>
+    <table class="table">
+        <tr>
+            <th scope="col">Film id</th>
+            <th scope="col">Namn</th>
+            <th scope="col">Hyrdatum</th>
+            <th scope="col">Åtelämningsdatum</th>
+            <th scope="col"></th>
+        </tr>
+
+        <th:block th:each="rentedmovie : ${rentedmovies}">
+            <tr class="table-row">
+                <td scope="col" th:text="${rentedmovie.id}"></td>
+                <td scope="col" th:text="${rentedmovie.movie.name}"></td>
+                <td scope="col" th:text="${rentedmovie.rentedDate}"></td>
+                <td scope="col" th:text="${rentedmovie.returnedDate}"></td>
+                <td scope="col"></td>
+            </tr>
+        </th:block>
+    </table>
+</div>
+
+<div class="container">
+    <h2>Filmhyrningshistorik</h2>
+    <table class="table">
+        <tr>
+            <th scope="col">Film id</th>
+            <th scope="col">Namn</th>
+            <th scope="col">Hyrdatum</th>
+        </tr>
+
+        <th:block th:each="rentedmovie : ${rentedmovieshistory}">
+            <tr class="table-row">
+                <td th:text="${rentedmovie.id}"></td>
+                <td th:text="${rentedmovie.movie.name}"></td>
+                <td th:text="${rentedmovie.rentedDate}"></td>
+            </tr>
+        </th:block>
+    </table>
+</div>
+<div th:replace="layouts/layoutfragments :: javascriptimports"></div>
+</body>
+</html>
