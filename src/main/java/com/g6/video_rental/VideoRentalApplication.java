@@ -2,9 +2,11 @@ package com.g6.video_rental;
 
 import com.g6.video_rental.domain.Entities.Customer;
 import com.g6.video_rental.domain.Entities.Movie;
+import com.g6.video_rental.domain.Entities.RentalHistory;
 import com.g6.video_rental.domain.Entities.RentedMovie;
 import com.g6.video_rental.domain.repository.CustomerRepository;
 import com.g6.video_rental.domain.repository.MovieRepository;
+import com.g6.video_rental.domain.repository.RentalHistoryRepository;
 import com.g6.video_rental.domain.repository.RentedMovieRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -23,7 +25,7 @@ public class VideoRentalApplication {
     }
 
     @Bean
-    CommandLineRunner runner(MovieRepository movieRepository, CustomerRepository customerRepository, RentedMovieRepository rentedMovieRepository) {
+    CommandLineRunner runner(MovieRepository movieRepository, CustomerRepository customerRepository, RentedMovieRepository rentedMovieRepository, RentalHistoryRepository rentalHistoryRepository) {
         return  args -> {
 
             // Adding movies to the db...
@@ -88,6 +90,7 @@ public class VideoRentalApplication {
             List<RentedMovie> rml1 = Arrays.asList(rentedMovieRepository.findById(rm1.getId()).get());
             c.setRentedMovies(rml1);
             customerRepository.save(c);
+
         };
     }
 }

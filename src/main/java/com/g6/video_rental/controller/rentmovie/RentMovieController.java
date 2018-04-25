@@ -2,9 +2,11 @@ package com.g6.video_rental.controller.rentmovie;
 
 import com.g6.video_rental.domain.Entities.Customer;
 import com.g6.video_rental.domain.Entities.Movie;
+import com.g6.video_rental.domain.Entities.RentalHistory;
 import com.g6.video_rental.domain.Entities.RentedMovie;
 import com.g6.video_rental.domain.repository.CustomerRepository;
 import com.g6.video_rental.domain.repository.MovieRepository;
+import com.g6.video_rental.domain.repository.RentalHistoryRepository;
 import com.g6.video_rental.domain.repository.RentedMovieRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -26,6 +28,8 @@ public class RentMovieController {
     MovieRepository movieRepository;
     @Autowired
     CustomerRepository customerRepository;
+    @Autowired
+    RentalHistoryRepository rentalHistoryRepository;
 
 
     @GetMapping("")
@@ -162,11 +166,16 @@ public class RentMovieController {
         Customer c = customerRepository.findBySocialSecurityNumber(rental.getCustomer().getSocialSecurityNumber());
         List<Movie> returnedMovies = new ArrayList<>();
 
-        rental.getMovies().stream().forEach(movie -> {
+
+        for (Movie movie : rental.getMovies()) {
+            RentalHistory rh = new RentalHistory(rental.getId(), rental.getCustomer().getSocialSecurityNumber(), movie.getName(), rental.getRentedDate(), LocalDate.now());
+            rentalHistoryRepository.save(rh);
+
             movie.setRented(false);
             movie.setRentedMovie(null);
             returnedMovies.add(movie);
-        });
+        }
+
         movieRepository.saveAll(returnedMovies);
 
         returnedMovies.clear();

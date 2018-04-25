@@ -3,6 +3,7 @@ package com.g6.video_rental.controller.Customer;
 import com.g6.video_rental.domain.Entities.Customer;
 import com.g6.video_rental.domain.Entities.Movie;
 import com.g6.video_rental.domain.Entities.RentedMovie;
+import com.g6.video_rental.domain.Entities.RentalHistory;
 import com.g6.video_rental.domain.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,14 +25,32 @@ public class CustomerController {
     private CustomerRepository customerRepository;
     @Autowired
     private RentedMovieRepository rentedMovieRepository;
+    @Autowired
+    private RentalHistoryRepository rentalHistoryRepository;
     
     @GetMapping("/customer")
     public String getCustomer(@RequestParam String socialSecurityNumber, Model model) {
         Customer customer = customerRepository.findBySocialSecurityNumber(socialSecurityNumber);
+//        List<RentedMovie> allReturnedRentalsPerCustomer = rentedMovieRepository.findByCustomer_SocialSecurityNumber(customer.getSocialSecurityNumber());
+        List<RentalHistory> rentalHistory = rentalHistoryRepository.findBySocialSecurityNumber(customer.getSocialSecurityNumber());
+
+//        for (RentedMovie customerRental : allReturnedRentalsPerCustomer) {
+//             Long rentalId = customerRental.getId();
+//             String sSN = customerRental.getCustomer().getSocialSecurityNumber();
+//             String movieName;
+//             LocalDate rentedDate = customerRental.getRentedDate();
+//             LocalDate returnedDate = customerRental.getReturnedDate();
+//
+//
+//            for (Movie movie : customerRental.getMovies()){
+//                movieName = movie.getName();
+//                rentalHistories.add(new RentalHistory(rentalId, sSN, movieName, rentedDate, returnedDate));
+//            }
+//        }
 
         model.addAttribute("customer", customer);
         model.addAttribute("rentedmovies", rentedMovieRepository.findByCustomer_SocialSecurityNumberAndReturnedDateIsNull(customer.getSocialSecurityNumber()));
-        model.addAttribute("rentedmovieshistory", customer.getRentedMovies());
+        model.addAttribute("rentedmovieshistory", rentalHistory);
         model.addAttribute("title", "Kund: " + customer.getFirstName() + " " + customer.getLastName());
         return "customer/customer";
 

@@ -66,19 +66,29 @@
             <th scope="col">Film id</th>
             <th scope="col">Namn</th>
             <th scope="col">Hyrdatum</th>
-            <th scope="col">Åtelämningsdatum</th>
-            <th scope="col"></th>
         </tr>
+        <th:block th:if="${rentedmovies != null}">
+            <th:block th:object="${rentedmovies}">
+                <th:block th:each="movie : ${rentedmovies.movies}">
 
-        <th:block th:object="${rentedmovies}">
+                    <tr class="table-row">
+                        <td scope="col" th:text="${rentedmovies.id}"></td>
+                        <td scope="col" th:text="${movie.name}"></td>
+                        <td scope="col" th:text="${rentedmovies.rentedDate}"></td>
+                        <!--<td scope="col" th:text="${rentedmovies.returnedDate}"></td>-->
+                        <!--<td scope="col"></td>-->
+                    </tr>
+                </th:block>
+            </th:block>
+        </th:block>
+        <th:block th:unless="${rentedmovies != null}">
             <tr class="table-row">
-                <td scope="col" th:text="${rentedmovies.id}"></td>
-                <!--<td scope="col" th:text="${rentedmovie.movie.name}"></td>-->
-                <td scope="col" th:text="${rentedmovies.rentedDate}"></td>
-                <td scope="col" th:text="${rentedmovies.returnedDate}"></td>
-                <td scope="col"></td>
+                <td></td>
+                <td>Inga aktuella uthyrningar</td>
+                <td></td>
             </tr>
         </th:block>
+
     </table>
 </div>
 
@@ -86,16 +96,18 @@
     <h2>Filmhyrningshistorik</h2>
     <table class="table">
         <tr>
-            <th scope="col">Film id</th>
+            <!--<th scope="col">UthyrningsId</th>-->
             <th scope="col">Namn</th>
             <th scope="col">Hyrdatum</th>
+            <th scope="col">Återlämningsdatum</th>
         </tr>
 
         <th:block th:each="rentedmovie : ${rentedmovieshistory}">
             <tr class="table-row">
-                <td th:text="${rentedmovie.id}"></td>
-                <!--<td th:text="${rentedmovie.movie.name}"></td>-->
-                <td th:text="${rentedmovie.rentedDate}"></td>
+                <!--<td scope="col" th:text="${rentedmovie.rentalId}"></td>-->
+                <td scope="col" th:text="${rentedmovie.movieName}"></td>
+                <td scope="col" th:text="${rentedmovie.rentedDate}"></td>
+                <td scope="col" th:text="${rentedmovie.returnedDate}"></td>
             </tr>
         </th:block>
     </table>
