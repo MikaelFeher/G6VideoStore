@@ -4,6 +4,9 @@ import com.g6.video_rental.domain.Entities.Movie;
 import com.g6.video_rental.domain.repository.MovieRepository;
 import com.g6.video_rental.domain.repository.RentedMovieRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -23,18 +26,24 @@ public class MovieController {
 
     // List all movies...
     @GetMapping("")
-    public String getMovies(Model model) {
+    public String getMovies(Model model, Pageable page) {
         List<Movie> movies = (List<Movie>) movieRepository.findAll();
-        model.addAttribute("movies", movies);
+        Page<Movie> pages = movieRepository.findAll(page);
+        //model.addAttribute("movies", movies);
+        model.addAttribute("movies", movieRepository.findAll(PageRequest.of(page != null ? page.getPageNumber() : 0, 5) ));
         model.addAttribute("title", "Filmer");
         return "movies/movies";
     }
 
     // Search for movies by name, category and/or release year...
     @GetMapping("/searchMovies")
-    public String search(Model model, @RequestParam(required = false) String name, @RequestParam(required = false) String category, @RequestParam(required = false) String releaseYear) {
-        List<Movie> filteredMovies = movieRepository.findByNameContainsIgnoreCaseAndCategoryContainsIgnoreCaseAndReleaseYearContains(name, category, releaseYear);
-        model.addAttribute("movies", filteredMovies);
+    public String search(Model model, @RequestParam(required = false) String name, @RequestParam(required = false) String category, @RequestParam(required = false) String releaseYear, @RequestParam(required = false) Pageable page) {
+        //Page<Movie> pages = movieRepository.findByNameContainsIgnoreCaseAndCategoryContainsIgnoreCaseAndReleaseYearContains(page, name, category, releaseYear);
+        //model.addAttribute("movies", filteredMovies);
+        model.addAttribute("movies", movieRepository.findByNameContainsIgnoreCaseAndCategoryContainsIgnoreCaseAndReleaseYearContains(PageRequest.of(page != null ? page.getPageNumber() : 0, 5), name, category, releaseYear ));
+        model.addAttribute("name", name);
+        model.addAttribute("category", category);
+        model.addAttribute("releaseYear", releaseYear);
         return "movies/movies";
     }
 
