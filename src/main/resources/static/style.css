@@ -35,6 +35,10 @@ thead, tbody tr {
     cursor: pointer;
 }
 
+#dashboardTable tbody tr{
+    cursor: pointer;
+}
+
 textarea[name=description] {
     resize: none;
 }

@@ -8,7 +8,7 @@
 <div class="container ">
     <div class="row mt-3">
         <div class=" col-md-6">
-            <table class="table table-striped ">
+            <table class="table table-striped " id="dashboardTable">
                 <thead class="thead-dark">
                 <h3 class="text-center">Försenade filmer</h3>
                 <tr>
@@ -22,7 +22,7 @@
                 <th:block th:each="lateMovie : ${lateMovies}">
                     <th:block th:each="movieName : ${lateMovie.getMovies()}">
                         <tr>
-                        <tr th:onclick="'showLateRentalDetails(\'' + ${lateMovie.getId()}+ '\')'">
+                        <tr th:onclick="'showLateRentalDetails(\'' + ${lateMovie.getId()}+ '\')'" class="text-danger">
                         <td th:text="${lateMovie.getId()}"></td>
                         <td th:text="${movieName.getName()}"></td>
                         <td th:text="${lateMovie.getCustomer().getSocialSecurityNumber()}"></td>
@@ -36,28 +36,18 @@
         </div>
 
         <div class=" col-md-6 text-center mt-3 border-left border-dark">
-
             <hr class="my-4">
-
-            <a href="#" th:href="@{/rentedmovies/rentmovie}" class="btn btn-primary btn-lg customButton">Hyr ut filmer</a>
-            <a href="#" th:href="@{/movies/addmovie}" class="btn btn-primary btn-lg customButton">Lägg till ny film</a>
-            <a href="#" th:href="@{/customer/addcustomer}" class="btn btn-primary btn-lg customButton">Lägg till
-                kund</a>
-
+                <a href="#" th:href="@{/rentedmovies/rentmovie}" class="btn btn-success btn-lg customButton">Hyr ut filmer</a>
+                <a href="#" th:href="@{/movies/addmovie}" class="btn btn-primary btn-lg customButton">Lägg till ny film</a>
+                <a href="#" th:href="@{/customer/addcustomer}" class="btn btn-primary btn-lg customButton">Lägg till kund</a>
             <hr class="my-4">
-
-            <a href="#" th:href="@{/customer/customers}" class="btn btn-primary btn-lg customButton">Kunder</a>
-            <a href="#" th:href="@{/movies}" class="btn btn-primary btn-lg customButton">Filmer</a>
-            <a href="#" th:href="@{/rentedmovies}" class="btn btn-primary btn-lg customButton">Uthyrda filmer</a>
-
-            <hr class="my-4">
-
-            <a href="#" th:href="@{/movies}" class="btn btn-danger btn-block btn-lg">Logga ut</a>
+                <a href="#" th:href="@{/customer/customers}" class="btn btn-primary btn-lg customButton">Kunder</a>
+                <a href="#" th:href="@{/movies}" class="btn btn-primary btn-lg customButton">Filmer</a>
+                <a href="#" th:href="@{/rentedmovies}" class="btn btn-primary btn-lg customButton">Uthyrda filmer</a>
 
             <hr class="my-4">
         </div>
     </div>
-
 </div>
 <div th:replace="layouts/layoutfragments :: javascriptimports"></div>
 </body>
