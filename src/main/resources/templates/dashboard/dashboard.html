@@ -21,13 +21,12 @@
                 <tbody>
                 <th:block th:each="lateMovie : ${lateMovies}">
                     <th:block th:each="movieName : ${lateMovie.getMovies()}">
-
                         <tr>
-                            <td th:text="${lateMovie.getCustomer().getSocialSecurityNumber()}"></td>
-                            <td th:text="${lateMovie.getCustomer().getFirstName, lateMovies.getLastName}"></td>
-                            <td th:text="${lateMovie.getCustomer().getPhoneNumber()}"></td>
-                            <td th:text="${lateMovie.getMovie()}"></td>
-
+                        <tr th:onclick="'showLateRentalDetails(\'' + ${lateMovie.getId()}+ '\')'">
+                        <td th:text="${lateMovie.getId()}"></td>
+                        <td th:text="${movieName.getName()}"></td>
+                        <td th:text="${lateMovie.getCustomer().getSocialSecurityNumber()}"></td>
+                        <td th:text="${lateMovie.getRentedDate()}"></td>
                         </tr>
                     </th:block>
                 </th:block>
@@ -37,14 +36,11 @@
         </div>
 
         <div class=" col-md-6 text-center mt-3 border-left border-dark">
-            <hr class="my-4">
-
-            <a href="#" th:href="@{/movies/addmovie}" class="btn btn-primary btn-block btn-lg">Lägg till ny film</a>
 
             <hr class="my-4">
 
-            <a href="#" th:href="@{/rentmovies/rentmovie}" class="btn btn-primary btn-lg customButton">Hyr ut filmer</a>
-            <a href="#" th:href="@{/movies}" class="btn btn-primary btn-lg customButton">Returnera filmer</a>
+            <a href="#" th:href="@{/rentedmovies/rentmovie}" class="btn btn-primary btn-lg customButton">Hyr ut filmer</a>
+            <a href="#" th:href="@{/movies/addmovie}" class="btn btn-primary btn-lg customButton">Lägg till ny film</a>
             <a href="#" th:href="@{/customer/addcustomer}" class="btn btn-primary btn-lg customButton">Lägg till
                 kund</a>
 
@@ -52,7 +48,7 @@
 
             <a href="#" th:href="@{/customer/customers}" class="btn btn-primary btn-lg customButton">Kunder</a>
             <a href="#" th:href="@{/movies}" class="btn btn-primary btn-lg customButton">Filmer</a>
-            <a href="#" th:href="@{/rentmovies/rentedmovies}" class="btn btn-primary btn-lg customButton">Uthyrda filmer</a>
+            <a href="#" th:href="@{/rentedmovies}" class="btn btn-primary btn-lg customButton">Uthyrda filmer</a>
 
             <hr class="my-4">
 
