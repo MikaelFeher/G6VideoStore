@@ -15,12 +15,7 @@ public class RentedMovie {
     private LocalDate rentedDate;
     private LocalDate returnedDate;
 
-//    public RentedMovie() {
-//    }
-
     public RentedMovie() {
-//        this.customer = customer;
-//        this.movies = movies;
         this.rentedDate = LocalDate.now();
     }
 
