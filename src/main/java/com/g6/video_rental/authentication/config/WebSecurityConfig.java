@@ -17,23 +17,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
-                /*.formLogin()
-                    .loginPage("/login")
-                    .failureUrl("/login?error")
-                    .permitAll()
-                    .and()
-                .logout()
-                    .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-                    .logoutSuccessUrl("/login")
-                    .permitAll()
-                    .and()
-                .authorizeRequests()
-                    .anyRequest().permitAll();*/
                 .formLogin()
                     .loginPage("/login")
                     .failureUrl("/login?error")
                     .permitAll()
-                    .defaultSuccessUrl("/dashboard")
+                    .defaultSuccessUrl("/dashboard", true)
                     .and()
                 .logout()
                     .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
