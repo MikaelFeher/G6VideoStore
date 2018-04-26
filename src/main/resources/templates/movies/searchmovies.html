@@ -53,13 +53,13 @@
 <div th:with="urlBuilder=${T(org.springframework.web.servlet.support.ServletUriComponentsBuilder).fromCurrentRequest()}">
     <nav>
         <ul class="pagination pagination-lg justify-content-center">
-            <li class="page-item" th:if="${movies.totalPages &gt; 1}"
-                th:each="i : ${#numbers.sequence(0,movies.totalPages-1)}">
-                <a class="page-link" th:text="${i+1}" th:href="@{${urlBuilder.replaceQueryParam('page', {i}).toUriString()}}"></a>
+            <li class="page-item" th:if="${movies.totalPages &gt; 1}" th:each="i : ${#numbers.sequence(0,movies.totalPages - 1)}">
+                <a class="page-link" th:text="${i+1}" th:href="@{${urlBuilder.replaceQueryParam('page', i).toUriString()}}"></a>
             </li>
         </ul>
     </nav>
 </div>
+
 <!--<div th:w class="nav-item" th:if="${movies.totalPages != null}" th:each="i : ${#numbers.sequence(0,movies.totalPages-1)}">-->
     <!--<a th:href="@{/order/{id}/details(id=3,action='show_all')}">-->
     <!--<a th:text="${i+1}" class="page-link" th:href="${#httpServletRequest.requestURI + '?page=' + i}"></a>-->

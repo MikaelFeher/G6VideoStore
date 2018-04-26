@@ -52,7 +52,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         manager.createUser(
                 builder
                         .username("sale")
-                        .password("whatisapassword")
+                        .password("a")
                         .roles("SALE")
                         .build());
         return manager;
