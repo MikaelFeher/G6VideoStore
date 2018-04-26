@@ -1,6 +1,9 @@
 package com.g6.video_rental.controller.Customer;
 
 import com.g6.video_rental.domain.Entities.Customer;
+import com.g6.video_rental.domain.Entities.Movie;
+import com.g6.video_rental.domain.Entities.RentedMovie;
+import com.g6.video_rental.domain.Entities.RentalHistory;
 import com.g6.video_rental.domain.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -10,6 +13,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -20,13 +25,17 @@ public class CustomerController {
     private CustomerRepository customerRepository;
     @Autowired
     private RentedMovieRepository rentedMovieRepository;
+    @Autowired
+    private RentalHistoryRepository rentalHistoryRepository;
     
     @GetMapping("/customer")
     public String getCustomer(@RequestParam String socialSecurityNumber, Model model) {
-        model.addAttribute("customer", customerRepository.findBySocialSecurityNumber(socialSecurityNumber));
-        Customer customer = customerRepository.findBySocialSecurityNumber(socialSecurityNumber).get(0);
-        model.addAttribute("rentedmovies", rentedMovieRepository.findByCustomer(customer));
-        model.addAttribute("rentedmovieshistory", customer.getRentedMovies());
+        Customer customer = customerRepository.findBySocialSecurityNumber(socialSecurityNumber);
+        List<RentalHistory> rentalHistory = rentalHistoryRepository.findBySocialSecurityNumber(customer.getSocialSecurityNumber());
+
+        model.addAttribute("customer", customer);
+        model.addAttribute("rentedmovies", rentedMovieRepository.findByCustomer_SocialSecurityNumberAndReturnedDateIsNull(customer.getSocialSecurityNumber()));
+        model.addAttribute("rentedmovieshistory", rentalHistory);
         model.addAttribute("title", "Kund: " + customer.getFirstName() + " " + customer.getLastName());
         return "customer/customer";
     }

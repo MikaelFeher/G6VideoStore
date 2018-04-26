@@ -15,7 +15,7 @@ public class Customer {
     private String country = "Sverige";
     private String phoneNumber;
     private String email;
-    private List<RentedMovie> rentedMovies = new ArrayList<>();
+    private List<RentedMovie> rentedMovies;
 
     public Customer() {
     }
@@ -105,7 +105,7 @@ public class Customer {
         this.email = email;
     }
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "customer")
+    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
     public List<RentedMovie> getRentedMovies() {
         return rentedMovies;
     }

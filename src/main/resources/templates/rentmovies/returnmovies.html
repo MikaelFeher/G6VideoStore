@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en"
+      xmlns="http://www.w3.org/1999/xhtml">
+<head th:replace="layouts/layoutfragments :: head"></head>
+<body>
+
+<div th:replace="layouts/layoutfragments :: navbar"></div>
+
+<div class="container">
+    <div th:object="${customer}" class="col-md-6 mt-5 mx-auto alert alert-success">
+        <p>Alla filmer har återlämnats för kund: </p>
+        <table class="table">
+            <thead class="border-0">
+            <tr class="border-0">
+                <th scope="col">Personnummer</th>
+                <th scope="col">Namn</th>
+            </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td th:text="*{getSocialSecurityNumber()}">Personnummer</td>
+                    <td th:text="(*{getFirstName()} + ' ' + *{getLastName()})">Namn</td>
+                </tr>
+            </tbody>
+        </table>
+        <a href="#" th:href="@{/rentedmovies}" class="btn btn-primary">Tillbaka till uthyrningar</a>
+    </div>
+</div>
+</div>
+
+<div th:replace="layouts/layoutfragments :: javascriptimports"></div>
+</body>
+</html>

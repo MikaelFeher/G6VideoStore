@@ -16,7 +16,8 @@ public class Movie {
     private String category;
     private String format;
     private boolean rented;
-    private List<RentedMovie> rentedMovies;
+    //private List<RentedMovie> rentedMovies;
+    private RentedMovie rentedMovie;
 
     public Movie() {
     }
@@ -88,14 +89,22 @@ public class Movie {
         this.rented = rented;
     }
 
-    @OneToMany()
+    @ManyToOne
+    public RentedMovie getRentedMovie() {
+        return rentedMovie;
+    }
+
+    public void setRentedMovie(RentedMovie rentedMovie) {
+        this.rentedMovie = rentedMovie;
+    }
+    /*@OneToMany()
     public List<RentedMovie> getRentedMovies() {
         return rentedMovies;
     }
 
     public void setRentedMovies(List<RentedMovie> rentedMovies) {
         this.rentedMovies = rentedMovies;
-    }
+    }*/
 
 
     /* Attempt to delete a movie since the connection to the rentedMovie entity seems to prevent deleting the movie */
@@ -110,6 +119,7 @@ public class Movie {
 //        }
 //    }
 
+
     @Override
     public String toString() {
         return "Movie{" +
@@ -120,6 +130,7 @@ public class Movie {
                 ", category='" + category + '\'' +
                 ", format='" + format + '\'' +
                 ", rented=" + rented +
+                ", rentedMovie=" + rentedMovie +
                 '}';
     }
 }

@@ -1,13 +1,15 @@
 package com.g6.video_rental.domain.repository;
 
-import com.g6.video_rental.domain.Entities.Customer;
 import com.g6.video_rental.domain.Entities.RentedMovie;
 import org.springframework.data.repository.CrudRepository;
-import org.springframework.stereotype.Repository;
 
+import java.time.LocalDate;
 import java.util.List;
 
-@Repository
 public interface RentedMovieRepository extends CrudRepository<RentedMovie, Long> {
-    List<RentedMovie> findByCustomer(Customer customer);
+    List<RentedMovie> findByRentedDateLessThanAndReturnedDateNull(LocalDate localDate);
+    List<RentedMovie> findByCustomer_SocialSecurityNumber(String socialSecurityNumber);
+    RentedMovie findByCustomer_SocialSecurityNumberAndReturnedDateIsNull(String socialSecurityNumber);
+    List<RentedMovie> findByCustomer_SocialSecurityNumberAndReturnedDateIsNotNull(String socialSecurityNumber);
+
 }

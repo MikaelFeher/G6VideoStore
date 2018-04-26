@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en"
+      xmlns="http://www.w3.org/1999/xhtml">
+<head th:replace="layouts/layoutfragments :: head"></head>
+<body>
+<div th:replace="layouts/layoutfragments :: navbar"></div>
+<div class="container">
+    <div class="col-md-6 ml-auto mr-auto mt-5">
+        <h2>Ny Uthyrning</h2>
+        <form th:action="@{/rentedmovies/rentmovie}" class="form-group" method="post">
+            <input type="text" class="form-control" name="socialSecurityNumber" placeholder="Personnummer...">
+            <div th:if="${errorMessage}">
+                <p th:text="${errorMessage}" class="alert alert-danger mt-1"></p>
+            </div>
+            <input type="text" class="form-control mt-2" name="movie1" placeholder="Artikelnummer...">
+            <input type="text" class="form-control mt-2" name="movie2" placeholder="Artikelnummer...">
+            <input type="text" class="form-control mt-2" name="movie3" placeholder="Artikelnummer...">
+            <div th:if="${alreadyRented}" class="alert alert-danger mt-2">
+                <p>En eller flera av filmerna är inte tillgängliga:</p>
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th scope="col">Artikelnr</th>
+                        <th scope="col">Titel</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <th:block th:each="m : ${alreadyRented}">
+                        <tr>
+                            <td th:text="${m.getProductNumber()}">Artikelnummer</td>
+                            <td th:text="${m.getName()}">Titel</td>
+                        </tr>
+                    </th:block>
+                    </tbody>
+                </table>
+            </div>
+            <a href="#" th:href="@{/dashboard}" class="btn btn-danger mt-2 ml-2 float-right">Avbryt</a>
+            <button th:type="submit" class="btn btn-success mt-2 float-right">Hyr ut</button>
+        </form>
+    </div>
+</div>
+<div th:replace="layouts/layoutfragments :: javascriptimports"></div>
+</body>
+</html>
