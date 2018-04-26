@@ -59,6 +59,11 @@
         </ul>
     </nav>
 </div>
+
+<!--<div th:w class="nav-item" th:if="${movies.totalPages != null}" th:each="i : ${#numbers.sequence(0,movies.totalPages-1)}">-->
+    <!--<a th:href="@{/order/{id}/details(id=3,action='show_all')}">-->
+    <!--<a th:text="${i+1}" class="page-link" th:href="${#httpServletRequest.requestURI + '?page=' + i}"></a>-->
+<!--</div>-->
 <div th:replace="layouts/layoutfragments :: javascriptimports"></div>
 </body>
 </html>

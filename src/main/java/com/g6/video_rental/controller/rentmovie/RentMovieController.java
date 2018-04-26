@@ -183,7 +183,4 @@ public class RentMovieController {
 
         return "rentmovies/returnmovies";
     }
-
-    // Action for finding rented movies by socialsecnum and/or movie(name?)...
-    // Action for returning rented movies...
 }

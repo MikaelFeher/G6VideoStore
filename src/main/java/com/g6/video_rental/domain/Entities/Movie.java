@@ -16,7 +16,6 @@ public class Movie {
     private String category;
     private String format;
     private boolean rented;
-    //private List<RentedMovie> rentedMovies;
     private RentedMovie rentedMovie;
 
     public Movie() {
@@ -97,28 +96,6 @@ public class Movie {
     public void setRentedMovie(RentedMovie rentedMovie) {
         this.rentedMovie = rentedMovie;
     }
-    /*@OneToMany()
-    public List<RentedMovie> getRentedMovies() {
-        return rentedMovies;
-    }
-
-    public void setRentedMovies(List<RentedMovie> rentedMovies) {
-        this.rentedMovies = rentedMovies;
-    }*/
-
-
-    /* Attempt to delete a movie since the connection to the rentedMovie entity seems to prevent deleting the movie */
-//    @Autowired
-//    private RentedMovieRepository rentedMovieRepository;
-//
-//    @PreRemove
-//    private void removeFromRentedMovies() {
-//        Iterable<RentedMovie> rms = rentedMovieRepository.findAll();
-//        for (RentedMovie rm : rms) {
-//            rm.getMovie();
-//        }
-//    }
-
 
     @Override
     public String toString() {
