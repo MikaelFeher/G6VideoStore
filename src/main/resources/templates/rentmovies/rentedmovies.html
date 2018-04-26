@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en"
+      xmlns="http://www.w3.org/1999/xhtml">
+<head th:replace="layouts/layoutfragments :: head"></head>
+<body>
+<div th:replace="layouts/layoutfragments :: navbar"></div>
+<div class="container mt-4">
+
+    <!--  Needs searchform to find rentals based on socialsecuritynumber/movietitle-->
+
+    <h2>Uthyrda Filmer</h2>
+    <table class="table table-striped table-hover customTable">
+        <thead class="thead-dark" id="table_head">
+        <tr>
+            <th scope="col">Uthyrningsnummer</th>
+            <th scope="col">Titel</th>
+            <th scope="col">Personnummer</th>
+            <th scope="col">Uthyrningsdatum</th>
+        </tr>
+        </thead>
+        <tbody>
+        <th:block th:each="rentedMovie : ${rentedMovies}">
+            <th:block th:each="movieName : ${rentedMovie.getMovies()}">
+            <tr th:onclick="'showRentalDetails(\'' + ${rentedMovie.getId()}+ '\')'" th:if="${!rentedMovie.getRentedDate().isBefore(yesterday)}">
+                <td th:text="${rentedMovie.getId()}"></td>
+                <td th:text="${movieName.getName()}"></td>
+                <td th:text="${rentedMovie.getCustomer().getSocialSecurityNumber()}"></td>
+                <td th:text="${rentedMovie.getRentedDate()}"></td>
+            </tr>
+                <tr th:onclick="'showRentalDetails(\'' + ${rentedMovie.getId()}+ '\')'" th:unless="${!rentedMovie.getRentedDate().isBefore(yesterday)}" class="text-danger">
+                <td th:text="${rentedMovie.getId()}"></td>
+                <td th:text="${movieName.getName()}"></td>
+                <td th:text="${rentedMovie.getCustomer().getSocialSecurityNumber()}"></td>
+                <td th:text="${rentedMovie.getRentedDate()}"></td>
+            </tr>
+            </th:block>
+        </th:block>
+        </tbody>
+    </table>
+</div>
+<div th:replace="layouts/layoutfragments :: javascriptimports"></div>
+</body>
+</html>

@@ -1,6 +1,8 @@
 package com.g6.video_rental.domain.Entities;
 
 import javax.persistence.*;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -9,32 +11,32 @@ import java.util.List;
 public class RentedMovie {
     private Long id;
     private Customer customer;
-    private Movie movie;
-    private Date rentedDate;
-    private Date returnedDate;
+    private List<Movie> movies;
+    private LocalDate rentedDate;
+    private LocalDate returnedDate;
+
+//    public RentedMovie() {
+//    }
 
     public RentedMovie() {
+//        this.customer = customer;
+//        this.movies = movies;
+        this.rentedDate = LocalDate.now();
     }
 
-    public RentedMovie(Customer customer, Movie movie) {
-        this.customer = customer;
-        this.movie = movie;
-        this.rentedDate = new Date();
-    }
-
-    public Date getRentedDate() {
+    public LocalDate getRentedDate() {
         return rentedDate;
     }
 
-    public void setRentedDate(Date rentedDate) {
+    public void setRentedDate(LocalDate rentedDate) {
         this.rentedDate = rentedDate;
     }
 
-    public Date getReturnedDate() {
+    public LocalDate getReturnedDate() {
         return returnedDate;
     }
 
-    public void setReturnedDate(Date returnedDate) {
+    public void setReturnedDate(LocalDate returnedDate) {
         this.returnedDate = returnedDate;
     }
 
@@ -57,23 +59,15 @@ public class RentedMovie {
         this.customer = customer;
     }
 
-    @ManyToOne()
-    public Movie getMovie() {
-        return movie;
+    @OneToMany(mappedBy = "rentedMovie", cascade = CascadeType.ALL)
+    public List<Movie> getMovies() {
+        return movies;
     }
 
-    public void setMovie(Movie movie) {
-        this.movie = movie;
+    public void setMovies(List<Movie> movies) {
+        this.movies = movies;
     }
 
-    @Override
-    public String toString() {
-        return "RentedMovie{" +
-                "id=" + id +
-                ", customer=" + customer +
-                ", movie=" + movie +
-                ", rentedDate=" + rentedDate +
-                ", returnedDate=" + returnedDate +
-                '}';
-    }
+
+
 }

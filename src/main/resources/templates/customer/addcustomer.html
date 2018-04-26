@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layouts/layoutfragments :: head"></head>
+<body>
+<div th:replace="layouts/layoutfragments :: navbar"></div>
+
+<div class="container">
+    <div class="col-md-12 ml-auto mr-auto mt-5">
+        <form method="post" th:object="${customer}" th:action="@{/customer/addcustomer}">
+            <div class="form-group row">
+                <div class="col-md-4">
+                    <input type="text" name="socialSecurityNumber" placeholder="Personnummer (YYMMDD-XXXX)"
+                           class="form-control form-control-lg">
+                </div>
+                <div class="col-md-4">
+                    <input type="text" name="firstName" placeholder="Förnamn" class="form-control form-control-lg">
+                </div>
+                <div class="col-md-4">
+                    <input type="text" name="lastName" placeholder="Efternamn" class="form-control form-control-lg">
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-md-3">
+                    <input type="text" name="address" placeholder="Adress" class="form-control form-control-lg"><br>
+                </div>
+                <div class="col-md-3">
+                    <input type="text" name="zipCode" placeholder="Postnummer" class="form-control form-control-lg"><br>
+                </div>
+                <div class="col-md-3">
+                    <input type="text" name="city" placeholder="Stad" class="form-control form-control-lg"><br>
+                </div>
+                <div class="col-md-3">
+                    <input type="text" name="country" th:value="Sverige" class="form-control form-control-lg"><br>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-md-3">
+                    <input type="text" name="phoneNumber" placeholder="Telefonnummer" class="form-control form-control-lg"><br>
+                </div>
+                <div class="col-md-7">
+                    <input type="email" name="email" placeholder="E-mail" class="form-control form-control-lg"><br>
+                </div>
+                <div class="col-md-2 mt-4.5">
+                    <button th:type="submit" name="action" value="change" class="btn-lg btn-success form-control">Spara</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<div th:replace="layouts/layoutfragments :: javascriptimports"></div>
+</body>
+</html>
