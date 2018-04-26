@@ -92,7 +92,13 @@
             </thead>
             <tbody>
             <th:block th:each="movie : ${movies}">
-                <tr>
+                <tr th:if="${!rental.getRentedDate().isBefore(yesterday)}">
+                    <td th:text="${rental.getId()}">Uthyrningsnummer</td>
+                    <td th:text="${movie.getProductNumber()}">Artikelnummer</td>
+                    <td th:text="${movie.getName()}">Titel</td>
+                    <td th:text="${rental.getRentedDate()}">Uthyrningsdatum</td>
+                </tr>
+                <tr th:unless="${!rental.getRentedDate().isBefore(yesterday)}" class="text-danger">
                     <td th:text="${rental.getId()}">Uthyrningsnummer</td>
                     <td th:text="${movie.getProductNumber()}">Artikelnummer</td>
                     <td th:text="${movie.getName()}">Titel</td>

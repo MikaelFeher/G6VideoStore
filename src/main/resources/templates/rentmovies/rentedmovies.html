@@ -21,7 +21,13 @@
         <tbody>
         <th:block th:each="rentedMovie : ${rentedMovies}">
             <th:block th:each="movieName : ${rentedMovie.getMovies()}">
-            <tr th:onclick="'showRentalDetails(\'' + ${rentedMovie.getId()}+ '\')'">
+            <tr th:onclick="'showRentalDetails(\'' + ${rentedMovie.getId()}+ '\')'" th:if="${!rentedMovie.getRentedDate().isBefore(yesterday)}">
+                <td th:text="${rentedMovie.getId()}"></td>
+                <td th:text="${movieName.getName()}"></td>
+                <td th:text="${rentedMovie.getCustomer().getSocialSecurityNumber()}"></td>
+                <td th:text="${rentedMovie.getRentedDate()}"></td>
+            </tr>
+                <tr th:onclick="'showRentalDetails(\'' + ${rentedMovie.getId()}+ '\')'" th:unless="${!rentedMovie.getRentedDate().isBefore(yesterday)}" class="text-danger">
                 <td th:text="${rentedMovie.getId()}"></td>
                 <td th:text="${movieName.getName()}"></td>
                 <td th:text="${rentedMovie.getCustomer().getSocialSecurityNumber()}"></td>

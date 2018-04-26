@@ -36,6 +36,8 @@ public class RentMovieController {
     public String rentedMoviesPage(Model model) {
         List<RentedMovie> rentedMovies = (List<RentedMovie>) rentedMovieRepository.findAll();
         model.addAttribute("rentedMovies", rentedMovies);
+        model.addAttribute("today", LocalDate.now());
+        model.addAttribute("yesterday", LocalDate.now().minusDays(1));
         model.addAttribute("title", "Uthyrda filmer");
         return "rentmovies/rentedmovies";
     }
@@ -50,6 +52,8 @@ public class RentMovieController {
         model.addAttribute("customer", customer);
         model.addAttribute("rental", rental);
         model.addAttribute("movies", rentedMovies);
+        model.addAttribute("today", LocalDate.now());
+        model.addAttribute("yesterday", LocalDate.now().minusDays(1));
         model.addAttribute("tableTitle", "Hyrda Filmer");
         model.addAttribute("title", "Uthyrningsinformation");
         return "rentmovies/rentaldetails";
@@ -73,22 +77,6 @@ public class RentMovieController {
         checkMovieRentability(movie1, moviesToRent, alreadyRented);
         checkMovieRentability(movie2, moviesToRent, alreadyRented);
         checkMovieRentability(movie3, moviesToRent, alreadyRented);
-
-//        if (movie1 == null) {
-//            // something
-//        }else {
-//            moviesToRent.add(movieRepository.findByProductNumber(movie1));
-//        }
-//        if (movie2 == null) {
-//            // something
-//        }else {
-//            moviesToRent.add(movieRepository.findByProductNumber(movie2));
-//        }
-//        if (movie3 == null) {
-//            // something
-//        } else {
-//            moviesToRent.add(movieRepository.findByProductNumber(movie3));
-//        }
 
         Customer c = customerRepository.findBySocialSecurityNumber(socialSecurityNumber);
         if (c == null) {
@@ -122,15 +110,15 @@ public class RentMovieController {
         return "redirect:/rentedmovies";
     }
 
-    private void checkMovieRentability(@RequestParam(required = false) Long movie2, List<Movie> moviesToRent, List<Movie> alreadyRented) {
-        if (movie2 == null) {
+    private void checkMovieRentability(@RequestParam(required = false) Long movieProdNum, List<Movie> moviesToRent, List<Movie> alreadyRented) {
+        if (movieProdNum == null) {
             // Do nothing...
         }else {
-            Movie m2 = movieRepository.findByProductNumber(movie2);
-            if (m2.isRented()){
-                alreadyRented.add(m2);
+            Movie m = movieRepository.findByProductNumber(movieProdNum);
+            if (m.isRented()){
+                alreadyRented.add(m);
             } else {
-                moviesToRent.add(m2);
+                moviesToRent.add(m);
             }
         }
     }
@@ -154,6 +142,8 @@ public class RentMovieController {
         model.addAttribute("customer", customer);
         model.addAttribute("rental", lateRental);
         model.addAttribute("movies", lateMovies);
+        model.addAttribute("today", LocalDate.now());
+        model.addAttribute("yesterday", LocalDate.now().minusDays(1));
         model.addAttribute("tableTitle", "Försenade Filmer");
         model.addAttribute("title", "Förseningsinformation");
 

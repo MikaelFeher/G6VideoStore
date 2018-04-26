@@ -18,7 +18,7 @@
         <tbody>
         <th:block th:each="lateMovie : ${lateMovies}">
             <th:block th:each="movieName : ${lateMovie.getMovies()}">
-                <tr th:onclick="'showLateRentalDetails(\'' + ${lateMovie.getId()}+ '\')'">
+                <tr th:onclick="'showLateRentalDetails(\'' + ${lateMovie.getId()}+ '\')'" class="text-danger">
                     <td th:text="${lateMovie.getId()}"></td>
                     <td th:text="${movieName.getName()}"></td>
                     <td th:text="${lateMovie.getCustomer().getSocialSecurityNumber()}"></td>

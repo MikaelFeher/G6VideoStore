@@ -31,29 +31,13 @@ public class CustomerController {
     @GetMapping("/customer")
     public String getCustomer(@RequestParam String socialSecurityNumber, Model model) {
         Customer customer = customerRepository.findBySocialSecurityNumber(socialSecurityNumber);
-//        List<RentedMovie> allReturnedRentalsPerCustomer = rentedMovieRepository.findByCustomer_SocialSecurityNumber(customer.getSocialSecurityNumber());
         List<RentalHistory> rentalHistory = rentalHistoryRepository.findBySocialSecurityNumber(customer.getSocialSecurityNumber());
-
-//        for (RentedMovie customerRental : allReturnedRentalsPerCustomer) {
-//             Long rentalId = customerRental.getId();
-//             String sSN = customerRental.getCustomer().getSocialSecurityNumber();
-//             String movieName;
-//             LocalDate rentedDate = customerRental.getRentedDate();
-//             LocalDate returnedDate = customerRental.getReturnedDate();
-//
-//
-//            for (Movie movie : customerRental.getMovies()){
-//                movieName = movie.getName();
-//                rentalHistories.add(new RentalHistory(rentalId, sSN, movieName, rentedDate, returnedDate));
-//            }
-//        }
 
         model.addAttribute("customer", customer);
         model.addAttribute("rentedmovies", rentedMovieRepository.findByCustomer_SocialSecurityNumberAndReturnedDateIsNull(customer.getSocialSecurityNumber()));
         model.addAttribute("rentedmovieshistory", rentalHistory);
         model.addAttribute("title", "Kund: " + customer.getFirstName() + " " + customer.getLastName());
         return "customer/customer";
-
     }
     
     @GetMapping("/customers")

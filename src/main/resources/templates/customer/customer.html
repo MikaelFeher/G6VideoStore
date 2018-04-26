@@ -11,46 +11,46 @@
             <div class="form-group row">
                 <div class="col-md-4">
                     <input type="text" name="socialSecurityNumber" th:value="${customer.socialSecurityNumber}"
-                           class="form-control form-control-lg">
+                           class="form-control">
                 </div>
                 <div class="col-md-4">
                     <input type="text" name="firstName" th:value="${customer.firstName}"
-                           class="form-control form-control-lg">
+                           class="form-control">
                 </div>
                 <div class="col-md-4">
                     <input type="text" name="lastName" th:value="${customer.lastName}"
-                           class="form-control form-control-lg">
+                           class="form-control">
                 </div>
             </div>
             <div class="form-group row">
                 <div class="col-md-3">
                     <input type="text" name="address" th:value="${customer.address}"
-                           class="form-control form-control-lg">
+                           class="form-control">
                 </div>
                 <div class="col-md-3">
                     <input type="text" name="zipCode" th:value="${customer.zipCode}"
-                           class="form-control form-control-lg">
+                           class="form-control">
                 </div>
                 <div class="col-md-3">
-                    <input type="text" name="city" th:value="${customer.city}" class="form-control form-control-lg">
+                    <input type="text" name="city" th:value="${customer.city}" class="form-control ">
                 </div>
                 <div class="col-md-3">
                     <input type="text" name="country" th:value="${customer.country}"
-                           class="form-control form-control-lg">
+                           class="form-control">
                 </div>
             </div>
             <div class="form-group row">
                 <div class="col-md-3">
                     <input type="text" name="phoneNumber" th:value="${customer.phoneNumber}"
-                           class="form-control form-control-lg">
+                           class="form-control">
                 </div>
                 <div class="col-md-7">
                     <input type="email" name="email" th:value="${customer.email}"
-                           class="form-control form-control-lg">
+                           class="form-control">
                 </div>
                 <div class="col-md-2">
                     <button th:type="submit" name="action" value="change"
-                            class="btn-lg btn-success form-control">Spara
+                            class="btn btn-success form-control">Spara
                     </button>
                 </div>
             </div>
@@ -61,12 +61,14 @@
 </div>
 <div class="container">
     <h2>Hyrda Filmer</h2>
-    <table class="table">
+    <table class="table table-striped table-hover">
+        <thead class="thead-dark">
         <tr>
             <th scope="col">Film id</th>
             <th scope="col">Namn</th>
             <th scope="col">Hyrdatum</th>
         </tr>
+        </thead>
         <th:block th:if="${rentedmovies != null}">
             <th:block th:object="${rentedmovies}">
                 <th:block th:each="movie : ${rentedmovies.movies}">
@@ -92,26 +94,28 @@
     </table>
 </div>
 
-<div class="container">
-    <h2>Filmhyrningshistorik</h2>
-    <table class="table">
-        <tr>
-            <!--<th scope="col">UthyrningsId</th>-->
-            <th scope="col">Namn</th>
-            <th scope="col">Hyrdatum</th>
-            <th scope="col">Återlämningsdatum</th>
-        </tr>
-
-        <th:block th:each="rentedmovie : ${rentedmovieshistory}">
-            <tr class="table-row">
-                <!--<td scope="col" th:text="${rentedmovie.rentalId}"></td>-->
-                <td scope="col" th:text="${rentedmovie.movieName}"></td>
-                <td scope="col" th:text="${rentedmovie.rentedDate}"></td>
-                <td scope="col" th:text="${rentedmovie.returnedDate}"></td>
+<th:block th:if="${!rentedmovieshistory.isEmpty()}">
+    <div class="container">
+        <h2>Filmhyrningshistorik</h2>
+        <table class="table table-striped table-hover">
+            <thead class="thead-dark">
+            <tr>
+                <th scope="col">Namn</th>
+                <th scope="col">Hyrdatum</th>
+                <th scope="col">Återlämningsdatum</th>
             </tr>
-        </th:block>
-    </table>
-</div>
+            </thead>
+
+            <th:block th:each="rentedmovie : ${rentedmovieshistory}">
+                <tr class="table-row">
+                    <td scope="col" th:text="${rentedmovie.movieName}"></td>
+                    <td scope="col" th:text="${rentedmovie.rentedDate}"></td>
+                    <td scope="col" th:text="${rentedmovie.returnedDate}"></td>
+                </tr>
+            </th:block>
+        </table>
+    </div>
+</th:block>
 <div th:replace="layouts/layoutfragments :: javascriptimports"></div>
 </body>
 </html>
