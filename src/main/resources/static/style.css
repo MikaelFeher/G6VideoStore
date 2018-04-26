@@ -1,20 +1,33 @@
+
+.customButton{
+    width: 160px; !important;
+}
+
+
+
 .customTable tbody {
     display:block;
     height: 75vh;
     overflow-y:auto;
     overflow-x: hidden;
 }
+
 thead, tbody tr {
     display:table;
     width:100%;
     table-layout:fixed;
 }
+
 .customTable thead {
+
     width: 100%;
     /* The Calculation makes the header less wide than the body, matter of taste... */
     /*width: calc( 100% - 1em )*/
 }
+
+
 .customTable table {
+
     width:100%;
 }
 
@@ -22,6 +35,11 @@ thead, tbody tr {
     cursor: pointer;
 }
 
+#dashboardTable tbody tr{
+    cursor: pointer;
+}
+
 textarea[name=description] {
     resize: none;
 }
+

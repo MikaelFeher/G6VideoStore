@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en"
+      xmlns="http://www.w3.org/1999/xhtml">
+<head th:replace="layouts/layoutfragments :: head"></head>
+<body>
+<div th:replace="layouts/layoutfragments :: navbar"></div>
+
+<div class="container mt-5">
+    <div class="row mt-3">
+        <div class=" col-md-6">
+            <table class="table table-striped" id="dashboardTable">
+                <thead class="thead-dark">
+                <h3 class="text-center">Försenade filmer</h3>
+                <tr>
+                    <th scope="col">Kundnummer</th>
+                    <th scope="col">Namn</th>
+                    <th scope="col">Telefonnummer</th>
+                    <th scope="col">Filmer</th>
+                </tr>
+                </thead>
+                <tbody>
+                <th:block th:each="lateMovie : ${lateMovies}">
+                    <th:block th:each="movieName : ${lateMovie.getMovies()}">
+                        <tr>
+                        <tr th:onclick="'showLateRentalDetails(\'' + ${lateMovie.getId()}+ '\')'" class="text-danger">
+                        <td th:text="${lateMovie.getId()}"></td>
+                        <td th:text="${movieName.getName()}"></td>
+                        <td th:text="${lateMovie.getCustomer().getSocialSecurityNumber()}"></td>
+                        <td th:text="${lateMovie.getRentedDate()}"></td>
+                        </tr>
+                    </th:block>
+                </th:block>
+
+                </tbody>
+            </table>
+        </div>
+
+        <div class=" col-md-6 text-center mt-3 border-left border-dark">
+            <hr class="my-4">
+                <a href="#" th:href="@{/rentedmovies/rentmovie}" class="btn btn-success btn-lg customButton">Ny uthyrning</a>
+                <a href="#" th:href="@{/movies/addmovie}" class="btn btn-primary btn-lg customButton">Lägg till ny film</a>
+                <a href="#" th:href="@{/customer/addcustomer}" class="btn btn-primary btn-lg customButton">Lägg till kund</a>
+            <hr class="my-4">
+                <a href="#" th:href="@{/customer/customers}" class="btn btn-primary btn-lg customButton">Kunder</a>
+                <a href="#" th:href="@{/movies}" class="btn btn-primary btn-lg customButton">Filmer</a>
+                <a href="#" th:href="@{/rentedmovies}" class="btn btn-primary btn-lg customButton">Uthyrda filmer</a>
+
+            <hr class="my-4">
+        </div>
+    </div>
+</div>
+<div th:replace="layouts/layoutfragments :: javascriptimports"></div>
+</body>
+</html>
